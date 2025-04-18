@@ -37,7 +37,6 @@ router.post("/create", userMiddleware, async (req: Request, res: Response): Prom
     const { title, subject, description, numQuestions, difficulty, testDateTime } = req.body;
     const userId = req.userId;
 
-    // Basic Validation
     if (!title || !subject || !description || !numQuestions || !difficulty || !testDateTime) {
         res.status(400).json({ message: "Missing required fields for test creation." });
         return;

@@ -5,8 +5,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Signup from './pages/Signup'
 import Login from './pages/Login'
 import Dashboard from './Components/Dashboard'
-
 import LandingPage from './pages/LandingPage'
+import ErrorRoute from './pages/ErrorRoute'
 
 function App() {
   return <StateProvider>
@@ -16,6 +16,7 @@ function App() {
             {<Route path='/signin' element = {<Login/>}/>}
             {<Route path='/dashboard' element = {<Dashboard/>}/>}
             {<Route path='/' element = {<LandingPage/>}/>}
+            {<Route path='*' element = {<ErrorRoute/>}/>}
         </Routes>
     </BrowserRouter>
   </StateProvider>

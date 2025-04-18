@@ -7,7 +7,7 @@ import Login from './pages/Login'
 import Dashboard from './Components/Dashboard'
 import GenerateTest from './Components/GenerateTest'
 import GeneratorModal from './Components/GeneratorModal'
-import LandingPage from './Pages/LandingPage'
+import LandingPage from './pages/LandingPage'
 
 function App() {
   return <StateProvider>

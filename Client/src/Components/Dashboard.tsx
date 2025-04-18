@@ -1,14 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
-// @ts-ignore
-
 import GeneratorModal from './GeneratorModal';
 import GenerateTest from './GenerateTest';
 import { StateContext } from '../Context API/StateContext';
 import DashboardTop from '../assets/DashboardTop.svg';
-
-
 
 interface Card {
     _id?: string; 

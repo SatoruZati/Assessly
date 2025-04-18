@@ -19,6 +19,19 @@ const testEvaluationModel = genAI.getGenerativeModel({
     model: "gemini-2.0-flash",
 });
 
+router.get("/tests", userMiddleware, async (req: Request, res: Response): Promise<void> => {
+    const userId = req.userId;
+    try {
+        const userTests = await TestModel.find({ userId: userId }).lean();
+        res.status(200).json({
+            tests: userTests 
+        });
+    } catch (error: any) {
+        console.error(`Error fetching tests for user ${userId}:`, error);
+        res.status(500).json({ message: "Server error while fetching your tests." });
+    }
+});
+
 // POST /api/v1/tests/create
 router.post("/create", userMiddleware, async (req: Request, res: Response): Promise<void> => {
     const { title, subject, description, numQuestions, difficulty, testDateTime } = req.body;

@@ -6,11 +6,9 @@ import Signup from './pages/Signup'
 import Login from './pages/Login'
 import Dashboard from './Components/Dashboard'
 import LandingPage from './pages/LandingPage'
-<<<<<<< Updated upstream
-
-=======
+import ErrorRoute from './pages/ErrorRoute'
 import Home from './pages/Home'
->>>>>>> Stashed changes
+
 function App() {
   return <StateProvider>
     <BrowserRouter>
@@ -20,6 +18,7 @@ function App() {
             {<Route path='/home' element = {<Home/>}/>}
             {<Route path='/dashboard' element = {<Dashboard/>}/>}
             {<Route path='/' element = {<LandingPage/>}/>}
+            {<Route path='*' element = {<ErrorRoute/>}/>}
         </Routes>
     </BrowserRouter>
   </StateProvider>

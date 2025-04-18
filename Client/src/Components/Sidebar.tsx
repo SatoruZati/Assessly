@@ -53,11 +53,11 @@ export const Sidebar = () => {
             {!isSidebarOpen && (
                 <div className="md:hidden fixed top-4 left-4 z-40">
                     <button
+                        className="p-2 bg-gray-800 hover:bg-gray-700 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
                         onClick={toggleSidebar}
-                        className="p-2 bg-white hover:bg-gray-100 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
                         aria-label="Open menu"
                     >
-                        <RxHamburgerMenu className="w-6 h-6 text-blue-700" />
+                        <RxHamburgerMenu className="w-6 h-6 text-blue-400" />
                     </button>
                 </div>
             )}
@@ -70,31 +70,31 @@ export const Sidebar = () => {
             )}
 
             <div
-                className={`bg-white border-r border-gray-300 min-h-screen w-72 fixed md:relative transform transition-transform duration-300 ease-in-out z-40 md:z-0 ${
+                className={`bg-gray-900 border-r border-gray-700 min-h-screen w-72 fixed md:relative transform transition-transform duration-300 ease-in-out z-40 md:z-0 ${
                     isSidebarOpen ? "translate-x-0 shadow-2xl" : "-translate-x-full"
                 } md:translate-x-0 md:shadow-md`}
             >
                 <div className="flex flex-col h-full">
-                    <div className="p-5 flex justify-between items-center border-b border-gray-200">
+                    <div className="p-5 flex justify-between items-center border-b border-gray-800">
                         <div
                             onClick={handleHomeClick}
                             className="text-2xl font-bold flex items-center cursor-pointer"
                         >
-                            <img
+                            {/* <img
                                 src={favicon}
                                 alt="Assessly Logo"
                                 className="w-8 h-8 mr-2"
-                            />
-                            <span className="text-blue-800 font-semibold">Assessly</span>
+                            /> */}
+                            <span className="text-blue-400 font-semibold">Assessly</span>
                         </div>
                         {isSidebarOpen && (
                             <div className="md:hidden block">
                                 <button
+                                    className="p-2 hover:bg-gray-800 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
                                     onClick={toggleSidebar}
-                                    className="p-2 hover:bg-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
                                     aria-label="Close menu"
                                 >
-                                    <IoCloseOutline className="w-6 h-6 text-gray-600" />
+                                    <IoCloseOutline className="w-6 h-6 text-gray-400" />
                                 </button>
                             </div>
                         )}
@@ -102,7 +102,7 @@ export const Sidebar = () => {
 
                     <div className="flex flex-col flex-grow justify-between">
                         <nav className="p-5 space-y-1">
-                            <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4 pl-4">Main Menu</div>
+                            <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4 pl-4">Main Menu</div>
                             <SidebarItem
                                 onClick={handleHomeClick}
                                 icon={<HomeIcon />}
@@ -123,7 +123,7 @@ export const Sidebar = () => {
                             />
                         </nav>
 
-                        <div className="p-5 border-t border-gray-200">
+                        <div className="p-5 border-t border-gray-800">
                             <SidebarItem
                                 onClick={handleLogoutClick}
                                 icon={<AiOutlineLogout className="w-6 h-6" />}

@@ -6,13 +6,18 @@ import Signup from './pages/Signup'
 import Login from './pages/Login'
 import Dashboard from './Components/Dashboard'
 import LandingPage from './pages/LandingPage'
+<<<<<<< Updated upstream
 
+=======
+import Home from './pages/Home'
+>>>>>>> Stashed changes
 function App() {
   return <StateProvider>
     <BrowserRouter>
         <Routes>
             {<Route path='/signup' element = {<Signup/>}/>}
             {<Route path='/signin' element = {<Login/>}/>}
+            {<Route path='/home' element = {<Home/>}/>}
             {<Route path='/dashboard' element = {<Dashboard/>}/>}
             {<Route path='/' element = {<LandingPage/>}/>}
         </Routes>

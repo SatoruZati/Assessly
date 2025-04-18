@@ -213,11 +213,11 @@ const Dashboard: React.FC = () => {
                         </button>
                     </div>
                 </div>
-                {/* <img
-                    src={}
+                <img
+                    src={DashboardTop}
                     alt="Education supplies"
                     className="absolute right-0 top-0 h-full w-auto pr-3 object-contain animate-float"
-                /> */}
+                />
             </div>
 
             <div className="mx-4 flex flex-col lg:flex-row gap-6">

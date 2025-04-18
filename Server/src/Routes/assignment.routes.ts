@@ -1,7 +1,7 @@
 import { Router, Request, Response } from "express";
 import { AssignmentModel, SubmissionModel } from "../Schema/db"; 
 import { userMiddleware } from "../Middleware/middleware"; 
-import { randomHash, InnerObjectType, FilteredObjectType, filterObjectProperties, ThirdFilteredObjectType, ThirdfilterObjectProperties } from "../utils/utils"; 
+import { randomHash, InnerObjectType, FilteredObjectType, filterObjectProperties, filterSecondObjectProperties, FilteredSecondObjectType, ThirdFilteredObjectType, ThirdfilterObjectProperties } from "../utils/utils"; 
 
 const router: Router = Router();
 
@@ -163,6 +163,30 @@ router.get("/latest", userMiddleware, async(req: Request, res: Response):Promise
     });
 
 })
+
+// GET /api/v1/assignments/share/:shareId
+router.get("/share/:shareId", async (req: Request, res: Response): Promise<void> => {
+    const hash = req.params.shareId;
+    try {
+        const data = await AssignmentModel.findOne({ hash: hash }) as InnerObjectType | null; 
+
+        if (!data) {
+            res.status(404).json({
+                message: "Assignment not found for the provided share link"
+            });
+        } else {
+            const filteredData: FilteredSecondObjectType = filterSecondObjectProperties(data);
+            res.status(200).json({
+                info: filteredData
+            });
+        }
+    } catch (error) {
+        console.error("Error fetching shared assignment:", error);
+        res.status(500).json({
+            message: "Failed to retrieve assignment details. Please try again later."
+        });
+    }
+});
 
 
 export default router;

@@ -58,3 +58,43 @@ export function filterObjectProperties(originalArray: InnerObjectType[]): Filter
     return filteredInnerObject as FilteredObjectType;
   });
 }
+
+export interface ThirdFilteredObjectType {
+  hash?: string;
+  Title?: string;
+  Deadline?: string;
+  Description?:string;
+  userId?: mongoose.Types.ObjectId;
+  _id?: string;
+}
+
+export function ThirdfilterObjectProperties(originalArray: InnerObjectType[]): ThirdFilteredObjectType[] {
+  const allowedKeys: (keyof ThirdFilteredObjectType)[] = [
+    'hash', 'Title', 'Deadline', 'userId', '_id', 'Description'
+  ];
+
+  return originalArray.map(innerObject => {
+    const plainObject = innerObject.toObject?.({ getters: false }) || { ...innerObject };
+    const filteredInnerObject: Partial<ThirdFilteredObjectType> = {};
+    for (const key of allowedKeys) {
+      if (plainObject[key] !== undefined) {
+        filteredInnerObject[key] = plainObject[key];
+      }
+    }
+
+    delete (filteredInnerObject as any).__v;
+    delete (filteredInnerObject as any).Questions;
+    delete (filteredInnerObject as any).Class;
+    delete (filteredInnerObject as any).Section;
+    delete (filteredInnerObject as any).RollNo;
+    delete (filteredInnerObject as any).Department;
+    delete (filteredInnerObject as any).Email;
+    delete (filteredInnerObject as any).PhoneNumber;
+    delete (filteredInnerObject as any).Name;
+    return filteredInnerObject as ThirdFilteredObjectType;
+  });
+}
+
+
+  
+//SECOND OBJECT HOYGAA SHARING LINK K LIA FOR SUBMISSION AYUSHIII TRY KOR KORAR AMI DEKHChi

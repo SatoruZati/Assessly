@@ -138,3 +138,19 @@ export function ThirdfilterObjectProperties(originalArray: InnerObjectType[]): T
     return filteredInnerObject as ThirdFilteredObjectType;
   });
 }
+interface DataObject {
+  [key: string]: any; 
+}
+
+export function filterNullValues(dataObject: DataObject) : DataObject {
+    const filteredData: DataObject = {};
+    for (const key in dataObject) {
+        if (dataObject.hasOwnProperty(key)) {
+            const value = dataObject[key];
+            if (value !== null) {
+                filteredData[key] = value;
+            }
+        }
+    }
+    return filteredData;
+}

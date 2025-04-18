@@ -2,6 +2,7 @@ import { Router, Request, Response } from "express";
 import { AssignmentModel, SubmissionModel } from "../Schema/db"; 
 import { userMiddleware } from "../Middleware/middleware"; 
 import { randomHash, InnerObjectType, FilteredObjectType, filterObjectProperties, filterSecondObjectProperties, FilteredSecondObjectType, ThirdFilteredObjectType, ThirdfilterObjectProperties } from "../utils/utils"; 
+import { createObjectCsvStringifier } from 'csv-writer'; 
 
 const router: Router = Router();
 
@@ -186,6 +187,43 @@ router.get("/share/:shareId", async (req: Request, res: Response): Promise<void>
             message: "Failed to retrieve assignment details. Please try again later."
         });
     }
+});
+
+router.post("/export", userMiddleware, async (req: Request, res: Response): Promise<void> => {
+    try {
+        const hash = req.body.hash;
+        if (!hash) {
+            res.status(400).send("Hash query parameter is required.");
+            return
+        }
+        const submissions = await SubmissionModel.find({hash: hash})
+        const csvStringifier = createObjectCsvStringifier({
+            header: [
+                { id: 'Name', title: 'Name' },
+                { id: 'Class', title: 'Class' },
+                { id: 'Section', title: 'Section' },
+                { id: 'RollNo', title: 'RollNo' },
+                { id: 'Department', title: 'Department' },
+                { id: 'Email', title: 'Email' },
+                { id: 'PhoneNumber', title: 'PhoneNumber' },
+                { id: 'hash', title: 'Hash' },
+                { id: 'evaluationResult', title: 'EvaluationResult' },
+                { id: 'assignmentFile', title: 'AssignmentFile' },
+                { id: '_id', title: 'Submission ID'},
+            ]
+        });
+
+        const csvData = csvStringifier.getHeaderString() + csvStringifier.stringifyRecords(submissions);
+
+        res.setHeader('Content-Type', 'text/csv');
+        res.setHeader('Content-Disposition', 'attachment; filename=submissions.csv');
+        res.status(200).send(csvData);
+
+    } catch (error: any) {
+        console.error("Error generating CSV for submissions:", error);
+        res.status(500).send("Error generating CSV for submissions");
+    }
+    return
 });
 
 

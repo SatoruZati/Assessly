@@ -9,6 +9,28 @@ const UserSchema = new Schema({
     username: {type: String, unique : true},
     password: String
 })
+const TestSchema = new Schema ({
+    title: { type: String },
+    subject: { type: String },
+    description: { type: String },
+    numQuestions: { type: Number },
+    difficulty: { type: String },
+    testDateTime: { type: String}, 
+    hash: { type: String },
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User"},
+    createdAt: { type: Date, default: Date.now }
+});
+
+const TestSubmissionSchema = new Schema ({
+    studentName: { type: String },
+    testHash: { type: String },
+    submittedAt: { type: Date, default: Date.now },
+    questions: [{ question: { type: String } }], 
+    answers: [{ answer: { type: String } }], 
+    score: { type: Number, min: 0, max: 100 }, 
+    evaluationPrompt: { type: String },
+    evaluationResponse: { type: String }
+});
 
 const AssignmentSchema = new Schema({
    Name: Boolean,
@@ -42,4 +64,5 @@ const SubmissionSchema: Schema = new Schema({
 export const UserModel = model("User", UserSchema );
 export const AssignmentModel = model("Assignment", AssignmentSchema); 
 export const SubmissionModel = model("Submissions", SubmissionSchema)
-  
+export const TestModel = model("Test", TestSchema);
+export const TestSubmissionModel = model("TestSubmission", TestSubmissionSchema);

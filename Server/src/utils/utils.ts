@@ -19,7 +19,7 @@ export interface InnerObjectType extends Document {
     Title?: string;
     Description?: string;
     Deadline?: string;
-    userId: mongoose.Types.ObjectId; // Explicitly type userId as ObjectId
+    userId: mongoose.Types.ObjectId; 
 }
 export interface FilteredObjectType {
   Name?: boolean;
@@ -45,7 +45,6 @@ export function filterObjectProperties(originalArray: InnerObjectType[]): Filter
   return originalArray.map(innerObject => {
     const plainObject = innerObject.toObject?.({ getters: false }) || { ...innerObject };
     const filteredInnerObject: Partial<FilteredObjectType> = {};
-    // Copy allowed keys
     for (const key of allowedKeys) {
       if (plainObject[key] !== undefined) {
         filteredInnerObject[key] = plainObject[key];
@@ -58,6 +57,51 @@ export function filterObjectProperties(originalArray: InnerObjectType[]): Filter
     return filteredInnerObject as FilteredObjectType;
   });
 }
+
+export interface FilteredSecondObjectType {
+    Name?: boolean;
+    Class?: boolean;
+    Section?: boolean;
+    RollNo?: boolean;
+    Department?: boolean;
+    Email?: boolean;
+    PhoneNumber?: boolean;
+    Title?: string;
+    Deadline?: string;
+    userId: string; 
+}
+  
+export function filterSecondObjectProperties(originalObject: InnerObjectType): FilteredSecondObjectType {
+    const allowedKeys: (keyof FilteredSecondObjectType)[] = [
+      'Name', 'Class', 'Section', 'RollNo', 
+      'Department', 'Email', 'PhoneNumber',
+      'Title', 'Deadline', 'userId'
+    ];
+  
+    const filteredObject: FilteredSecondObjectType = {} as FilteredSecondObjectType;
+    const plainObject = originalObject.toObject ? originalObject.toObject() : originalObject;
+  
+    for (const key of allowedKeys) {
+      if (plainObject[key] !== undefined) {
+        if (key === 'userId' && plainObject[key] instanceof mongoose.Types.ObjectId) {
+          (filteredObject as any)[key] = plainObject[key].toString();
+        } else {
+          (filteredObject as any)[key] = plainObject[key];
+        }
+      }
+    }
+  
+    const finalFilteredObject = {
+      ...filteredObject,
+      _id: undefined,
+      __v: undefined,
+      hash: undefined,
+      Questions: undefined,
+      Description: undefined
+    };
+  
+    return JSON.parse(JSON.stringify(finalFilteredObject)); 
+  }
 
 export interface ThirdFilteredObjectType {
   hash?: string;
@@ -94,7 +138,3 @@ export function ThirdfilterObjectProperties(originalArray: InnerObjectType[]): T
     return filteredInnerObject as ThirdFilteredObjectType;
   });
 }
-
-
-  
-//SECOND OBJECT HOYGAA SHARING LINK K LIA FOR SUBMISSION AYUSHIII TRY KOR KORAR AMI DEKHChi

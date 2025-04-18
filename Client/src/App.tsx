@@ -2,8 +2,8 @@ import './Global.css'
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Signup from './pages/Signup'
 import Login from './pages/Login'
+       
 function App() {
-
   return (
     <BrowserRouter>
         <Routes>
@@ -11,7 +11,6 @@ function App() {
             {<Route path='/signin' element = {<Login/>}/>}
         </Routes>
     </BrowserRouter>
-
   )
 }
 

@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Input from "../Components/Input";
+import { Check, Info } from "lucide-react";
 
 const Signup: React.FC = () => {
   const usernameRef = useRef<HTMLInputElement>(null);
@@ -45,7 +46,7 @@ const Signup: React.FC = () => {
         if (error.response.status === 409) {
           alert("Signup Failed: Username already exists!");
         } else {
-          alert(`Signup Failed: ${error.response.data.message || 'Server error'}`);
+          alert(`Signup Failed: ${error.response.data?.message || 'Server error'}`);
         }
       } else if (error.request) {
         console.error("Error Request:", error.request);
@@ -58,82 +59,89 @@ const Signup: React.FC = () => {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-blue-100 via-purple-100 to-pink-100 p-4">
-      <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-xl shadow-lg">
-        <h1 className="text-3xl font-bold text-center text-gray-800">
-          Assessly
-        </h1>
-
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            signup();
-          }}
-          className="space-y-4"
-        >
-          <div className="mb-4">
-            <Input
-              label="First Name"
-              type="text"
-              placeholder="Enter your first name"
-              inputRef={firstnameRef}
-             />
+    <div className="flex items-center justify-center min-h-screen bg-gray-800 pt-10 pb-10">
+      <div className="flex w-full max-w-5xl overflow-hidden rounded-2xl bg-white ring-2 ring-blue-500/50 shadow-[0_0_25px_rgba(59,130,246,0.4)]">
+        <div className="hidden md:flex md:flex-col justify-between w-1/2 bg-gradient-to-br from-gray-800 via-gray-900 to-black p-12 text-white relative">
+           <div className="absolute top-0 left-0 w-full h-full opacity-10">
+            <div className="absolute top-10 left-10 w-40 h-40 rounded-full bg-blue-400/30 blur-3xl animate-pulse"></div>
+            <div className="absolute bottom-10 right-10 w-60 h-60 rounded-full bg-gray-500/30 blur-3xl animate-pulse delay-1000"></div>
+            <div className="absolute top-1/2 left-1/3 w-40 h-40 rounded-full bg-blue-600/20 blur-3xl animate-pulse delay-500"></div>
           </div>
+          <div className="relative z-10">
+            <h1 className="text-4xl font-bold mb-4 font-sans">Assessly</h1>
+            <p className="text-lg text-gray-300 mb-8">
+              Your ultimate assessment companion for streamlined evaluations.
+            </p>
+            <div className="space-y-4">
+              {[
+                "Online Assessments made easy",
+                "Track student progress ",
+                "Generate insightful reports",
+                "Simplify grading workflows",
 
-           <div className="mb-4">
-            <Input
-              label="Last Name"
-              type="text"
-              placeholder="Enter your last name"
-              inputRef={lastnameRef}
-             />
+              ].map((text, index) => (
+                <div key={index} className="flex items-center space-x-3">
+                  <div className="bg-blue-500/30 p-1.5 rounded-full">
+                    <Check className="h-4 w-4 text-blue-200" />
+                  </div>
+                  <span className="text-gray-200">{text}</span>
+                </div>
+              ))}
+            </div>
           </div>
-
-           <div className="mb-4">
-            <Input
-              label="Username (Email)"
-              type="email"
-              placeholder="you@example.com"
-              inputRef={usernameRef}
-             />
+          <div className="relative z-10 mt-auto">
+            <div className="inline-flex items-center space-x-2 bg-gray-700/50 px-4 py-2 rounded-lg">
+              <Info className="h-5 w-5 text-blue-300" />
+              <span className="text-gray-300 text-sm">Join educators simplifying assessments</span>
+            </div>
           </div>
+        </div>
 
-          <div className="mb-4">
-            <Input
-              label="Password"
-              type="password"
-              placeholder="Create a password"
-              inputRef={initialpassRef}
-             />
+        <div className="w-full md:w-1/2 p-8 lg:p-12 flex flex-col justify-center bg-white">
+          <div className="md:hidden text-center mb-8">
+             <h2 className="text-3xl font-bold text-gray-900 font-sans">Assessly</h2>
+             <p className="text-gray-600">Streamlined evaluations</p>
           </div>
-
-           <div className="mb-4">
-            <Input
-              label="Confirm Password"
-              type="password"
-              placeholder="Confirm your password"
-              inputRef={passwordRef}
-             />
+          <h3 className="text-2xl font-semibold text-gray-800 mb-6">Create your account</h3>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              signup();
+            }}
+            className="space-y-5"
+          >
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-5">
+              <Input label="FirstName" type="text" placeholder="Your first name" inputRef={firstnameRef} />
+              <Input label="LastName" type="text" placeholder="Your last name" inputRef={lastnameRef} />
+            </div>
+            <Input label="Username" type="email" placeholder="you@example.com" inputRef={usernameRef} />
+            <Input label="Password" type="password" placeholder="Enter password" inputRef={initialpassRef} />
+            <Input label="Confirm Password" type="password" placeholder="Re-enter password" inputRef={passwordRef} />
+            <div className="pt-2">
+              <button
+                className="w-full bg-gray-900 hover:bg-gray-700 text-white font-bold py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50 transition-colors duration-300 ease-in-out shadow-md hover:shadow-lg"
+                type="submit"
+              >
+                Create Account
+              </button>
+            </div>
+          </form>
+          <div className="mt-8 text-center">
+            <div className="flex items-center justify-center">
+              <div className="flex-grow h-px bg-gray-300"></div>
+              <div className="mx-4 text-sm text-gray-500">or</div>
+              <div className="flex-grow h-px bg-gray-300"></div>
+            </div>
+            <p className="mt-6 text-sm text-gray-600">
+              Already have an account?{" "}
+              <a
+                href="/signin"
+                className="font-medium text-blue-600 hover:text-blue-700 hover:underline transition-colors duration-200"
+              >
+                Log in
+              </a>
+            </p>
           </div>
-
-
-          <div className="pt-2">
-            <button
-              type="submit"
-              className="w-full px-4 py-2 font-semibold text-white bg-blue-600 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition duration-200 ease-in-out"
-            >
-              Create Account
-            </button>
-          </div>
-        </form>
-
-        <div className="text-center text-sm text-gray-600">
-          <p>
-            Already have an account?{' '}
-            <a href="/signin" className="font-medium">
-              Log in
-            </a>
-          </p>
         </div>
       </div>
     </div>

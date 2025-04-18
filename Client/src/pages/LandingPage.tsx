@@ -20,6 +20,14 @@ import {
   ChevronRight,
 } from "lucide-react"
 import { FaTwitter, FaLinkedin, FaGithub, FaDiscord, FaFacebook } from "react-icons/fa"
+import Hack4BengalLogo from '../assets/Hack4BengalLogo.png';
+import AIStudioLogo from '../assets/AIStudioLogo.png';
+import GeminiLogo from '../assets/GeminiLogo.png';
+import VercelLogo from '../assets/VercelLogo.png';
+import TailwindCSSLogo from '../assets/TailwindCSSLogo.png';
+import TypeScriptLogo from '../assets/TypeScriptLogo.png';
+import ViteLogo from '../assets/ViteLogo.png';
+import ReactLogo from '../assets/ReactLogo.png';
 
 const App = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -1335,6 +1343,53 @@ const App = () => {
         </div>
       </section>
 
+      <section className="py-16 md:py-20 bg-gradient-to-br from-[#eef2fa] via-[#f8fafc] to-[#e6ecfa] dark:from-[#181a20] dark:via-[#233554] dark:to-[#4f8cff]/10">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mx-auto mb-12 md:mb-16 text-center">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white mb-2">
+              Powered By
+            </h2>
+            <p className="text-blue-700 dark:text-blue-200 text-base md:text-lg">
+              Built with cutting-edge technologies to deliver the best experience to educators
+            </p>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8 justify-center">
+            <div className="flex flex-col items-center bg-white/80 dark:bg-[#181a20]/70 rounded-2xl shadow-xl border border-blue-100/40 dark:border-blue-900/40 p-6 transition-transform transition-shadow duration-200 hover:-translate-y-2 hover:shadow-blue-300/40 hover:shadow-2xl">
+              <img src={Hack4BengalLogo} alt="Hack4Bengal 4.0" className="w-20 h-20 object-contain rounded-xl mb-3" />
+              <span className="text-sm md:text-base font-semibold text-gray-800 dark:text-blue-100 text-center">Hack4Bengal 4.0</span>
+            </div>
+            <div className="flex flex-col items-center bg-white/80 dark:bg-[#181a20]/70 rounded-2xl shadow-xl border border-blue-100/40 dark:border-blue-900/40 p-6 transition-transform transition-shadow duration-200 hover:-translate-y-2 hover:shadow-blue-300/40 hover:shadow-2xl">
+              <img src={AIStudioLogo} alt="Google AI Studio" className="w-20 h-20 object-contain rounded-xl mb-3" />
+              <span className="text-sm md:text-base font-semibold text-gray-800 dark:text-blue-100 text-center">Google AI Studio</span>
+            </div>
+            <div className="flex flex-col items-center bg-white/80 dark:bg-[#181a20]/70 rounded-2xl shadow-xl border border-blue-100/40 dark:border-blue-900/40 p-6 transition-transform transition-shadow duration-200 hover:-translate-y-2 hover:shadow-blue-300/40 hover:shadow-2xl">
+              <img src={GeminiLogo} alt="Gemini" className="w-20 h-20 object-contain rounded-xl mb-3" />
+              <span className="text-sm md:text-base font-semibold text-gray-800 dark:text-blue-100 text-center">Gemini</span>
+            </div>
+            <div className="flex flex-col items-center bg-white/80 dark:bg-[#181a20]/70 rounded-2xl shadow-xl border border-blue-100/40 dark:border-blue-900/40 p-6 transition-transform transition-shadow duration-200 hover:-translate-y-2 hover:shadow-blue-300/40 hover:shadow-2xl">
+              <img src={VercelLogo} alt="Vercel" className="w-20 h-20 object-contain rounded-xl mb-3" />
+              <span className="text-sm md:text-base font-semibold text-gray-800 dark:text-blue-100 text-center">Vercel</span>
+            </div>
+            <div className="flex flex-col items-center bg-white/80 dark:bg-[#181a20]/70 rounded-2xl shadow-xl border border-blue-100/40 dark:border-blue-900/40 p-6 transition-transform transition-shadow duration-200 hover:-translate-y-2 hover:shadow-blue-300/40 hover:shadow-2xl">
+              <img src={TailwindCSSLogo} alt="Tailwind CSS" className="w-20 h-20 object-contain rounded-xl mb-3" />
+              <span className="text-sm md:text-base font-semibold text-gray-800 dark:text-blue-100 text-center">Tailwind CSS</span>
+            </div>
+            <div className="flex flex-col items-center bg-white/80 dark:bg-[#181a20]/70 rounded-2xl shadow-xl border border-blue-100/40 dark:border-blue-900/40 p-6 transition-transform transition-shadow duration-200 hover:-translate-y-2 hover:shadow-blue-300/40 hover:shadow-2xl">
+              <img src={TypeScriptLogo} alt="TypeScript" className="w-20 h-20 object-contain rounded-xl mb-3" />
+              <span className="text-sm md:text-base font-semibold text-gray-800 dark:text-blue-100 text-center">TypeScript</span>
+            </div>
+            <div className="flex flex-col items-center bg-white/80 dark:bg-[#181a20]/70 rounded-2xl shadow-xl border border-blue-100/40 dark:border-blue-900/40 p-6 transition-transform transition-shadow duration-200 hover:-translate-y-2 hover:shadow-blue-300/40 hover:shadow-2xl">
+              <img src={ViteLogo} alt="Vite" className="w-20 h-20 object-contain rounded-xl mb-3" />
+              <span className="text-sm md:text-base font-semibold text-gray-800 dark:text-blue-100 text-center">Vite</span>
+            </div>
+            <div className="flex flex-col items-center bg-white/80 dark:bg-[#181a20]/70 rounded-2xl shadow-xl border border-blue-100/40 dark:border-blue-900/40 p-6 transition-transform transition-shadow duration-200 hover:-translate-y-2 hover:shadow-blue-300/40 hover:shadow-2xl">
+              <img src={ReactLogo} alt="React" className="w-20 h-20 object-contain rounded-xl mb-3" />
+              <span className="text-sm md:text-base font-semibold text-gray-800 dark:text-blue-100 text-center">React</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="bg-gradient-to-r from-[#1a2036] to-[#0d1117] py-16 md:py-20 relative overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
           <motion.div
@@ -1405,7 +1460,7 @@ const App = () => {
                   <div className="bg-blue-900/60 p-2 rounded-full mr-3">
                     <CheckCircle className="h-5 w-5 text-blue-300" />
                   </div>
-                  <span className="text-white">Free 14-day trial</span>
+                  <span className="text-white">Free to Use</span>
                 </div>
                 <div className="flex items-center">
                   <div className="bg-blue-900/60 p-2 rounded-full mr-3">
@@ -1421,7 +1476,7 @@ const App = () => {
                   whileTap={{ scale: 0.95 }}
                 >
                   <span className="relative z-10 flex items-center justify-center">
-                    Start Free Trial
+                    Start Free Today
                     <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                   </span>
                   <motion.div className="absolute inset-0 bg-gradient-to-r from-blue-700 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -1481,27 +1536,27 @@ const App = () => {
                 {
                   question: "How does the AI grading system work?",
                   answer:
-                    "Our AI uses advanced machine learning algorithms to analyze student responses against expected answers. It can process both digital and handwritten submissions through OCR technology, providing accurate grading and detailed feedback in seconds.",
+                    "Our platform uses Gemini's advanced machine learning algorithms to analyze student responses against expected answers. It can process both digital and handwritten submissions through OCR technology, providing accurate grading and detailed feedback in seconds.",
                 },
                 {
                   question: "Is Assessly compatible with my existing LMS?",
                   answer:
-                    "Yes! Assessly integrates seamlessly with popular Learning Management Systems including Canvas, Blackboard, Moodle, and Google Classroom. Our API allows for easy data exchange and grade syncing.",
+                    "No as of now, but Assessly will be compatible with popular Learning Management Systems including Canvas, Blackboard, Moodle, and Google Classroom in Future. Our API will allow for easy data exchange and grade syncing.",
                 },
                 {
                   question: "How secure is my students' data?",
                   answer:
-                    "We take data privacy extremely seriously. All student data is encrypted both in transit and at rest. We are FERPA compliant and never use student data for training our AI models without explicit consent.",
+                    "We take data privacy extremely seriously. All student data is available only to the teacher. We shall never use student data for training our AI models without explicit consent.",
                 },
                 {
-                  question: "Can I customize the grading criteria?",
+                  question: "Can I customize the submission criteria?",
                   answer:
-                    "Assessly allows you to set custom rubrics, point values, and grading scales. You can also adjust the AI sensitivity for partial credit and create your own feedback templates.",
+                    "Assessly allows you to set custom data inputs, specific credential values, and assignment deadlines. You can also adjust various settings for submission and have your own submissions .csv file.",
                 },
                 {
                   question: "Do I need technical knowledge to use Assessly?",
                   answer:
-                    "Not at all! Assessly is designed with educators in mind, featuring an intuitive interface that requires no technical expertise. Our setup wizard will guide you through the process in minutes.",
+                    "Not at all! Assessly is designed with educators in mind, featuring an intuitive interface that requires no technical expertise. Our easy UI will enable you to get started in minutes.",
                 },
               ].map((faq, index) => (
                 <motion.div

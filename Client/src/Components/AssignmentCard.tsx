@@ -46,7 +46,7 @@ const AssignmentCard: React.FC<AssignmentProps> = (props) => {
 
   return (
     <div className="group mb-6 rounded-2xl justify-between flex flex-col shadow-xl bg-gray-800 hover:shadow-2xl max-w-sm min-h-76 transition-shadow duration-300 ease-in-out overflow-hidden border border-gray-700 hover:border-blue-500/40 transform hover:-translate-y-2">
-      {/* Header Section */}
+      
       <div className="px-6 py-6 border-b border-gray-700">
         <div className="flex items-center justify-between">
           <h2 className="text-xl font-semibold text-ellipsis text-gray-100 mb-1 truncate group-hover:text-blue-300 transition-colors duration-200">
@@ -76,7 +76,7 @@ const AssignmentCard: React.FC<AssignmentProps> = (props) => {
         )}
       </div>
 
-      {/* Body Section - Direct Styling for Tags */}
+      
       <div className="px-6 pt-1 pb-3">
         <h3 className="text-md font-semibold text-gray-300 mb-4 uppercase tracking-wide">
           Information Required
@@ -95,18 +95,18 @@ const AssignmentCard: React.FC<AssignmentProps> = (props) => {
         </div>
       </div>
 
-      {/* Footer Section */}
+      
       <div className="px-6 py-4 bg-gray-900 flex justify-between items-center text-sm text-gray-400 border-t border-gray-700">
         <div className="flex items-center space-x-3">
           {hash && (
             <a
-              href={`http://localhost:3000/share/${hash}`}
+              href={`https://assessly-h4b.vercel.app/share/${hash}`}
               target="_blank"
               rel="noopener noreferrer"
               className="font-mono text-blue-400 hover:text-blue-300 transition-colors"
               title={`Shareable Link for Assignment: ${Title}`}
               onClick={() => {
-                navigator.clipboard.writeText(`http://localhost:3000/share/${hash}`);
+                navigator.clipboard.writeText(`https://assessly-h4b.vercel.app/share/${hash}`);
                 alert("Link copied to clipboard");
               }}
             >

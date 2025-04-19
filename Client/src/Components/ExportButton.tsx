@@ -1,15 +1,14 @@
 import axios from 'axios';
 
 interface ExportButtonProps {
-    hash: string;  // Add a prop for the submission hash
+    hash: string;  
 }
-
 export default function ExportButton({ hash }: ExportButtonProps) {
     const token = localStorage.getItem('token');
 
     const handleExport = async () => {
         try {
-            const response = await axios.post("http://localhost:3000/api/v1/assignments/export", {
+            const response = await axios.post("https://assessly-h4b-server.vercel.app/api/v1/assignments/export", {
                 hash: hash,  
             }, {
                 headers: {
@@ -21,10 +20,10 @@ export default function ExportButton({ hash }: ExportButtonProps) {
             const url = window.URL.createObjectURL(new Blob([response.data]));
             const link = document.createElement('a');
             link.href = url;
-            link.setAttribute('download', `submissions.csv`); // Consistent filename
+            link.setAttribute('download', `submissions.csv`); 
             document.body.appendChild(link);
             link.click();
-            document.body.removeChild(link); // Clean up
+            document.body.removeChild(link); 
         } catch (error: any) {
             console.error("Error exporting data:", error);
             alert("Error exporting data.  See console for details.");

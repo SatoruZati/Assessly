@@ -9,10 +9,39 @@ import testRoutes from './Routes/test.route'
 
 const app = express();
 app.use(express.json());
-app.use(cors({
-    origin: "http://localhost:5173",
-    credentials: true
-}));
+//CORS configuration done because of issues vercel deployment
+const corsOptions: cors.CorsOptions = {
+    origin: [
+      'https://assessly-h4b.vercel.app/',
+      'http://localhost:5173/'  
+    ],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: [
+      'Content-Type',
+      'Authorization',
+      'token',
+      'X-Requested-With',
+      'Accept',
+      'Origin',
+      'X-File-Name', 
+      'Content-Disposition', 
+      'X-CSRF-Token', 
+      'X-HTTP-Method-Override' 
+    ],
+    exposedHeaders: [
+      'Content-Disposition', 
+      'X-Submission-ID', 
+      'X-RateLimit-Limit', 
+      'X-RateLimit-Remaining'
+    ],
+    credentials: true,
+    maxAge: 86400, 
+    preflightContinue: false,
+    optionsSuccessStatus: 204
+  };
+  
+  app.use(cors(corsOptions));
+  app.options('*', cors(corsOptions));
 
 declare global{
     namespace Express{

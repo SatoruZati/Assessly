@@ -24,7 +24,7 @@ const Submissions = () => {
       setLoading(true)
       setError(null)
       try {
-        const response = await axios.get("http://localhost:3000/api/v1/assignments/latest", {
+        const response = await axios.get("https://assessly-h4b-server.vercel.app/api/v1/assignments/latest", {
           headers: {
             token: token,
           },

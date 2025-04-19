@@ -120,7 +120,7 @@ const GeneratorModal = () => {
         Deadline: deadline,
       }
   
-      axios.post("http://localhost:3000/api/v1/assignments/generate", dataToSend, {
+      axios.post("https://assessly-h4b-server.vercel.app/api/v1/assignments/generate", dataToSend, {
           headers: {
             token: token
           }
@@ -128,7 +128,7 @@ const GeneratorModal = () => {
         .then(response => {
           const hash = response.data.hash;
           localStorage.setItem('assignmentHash', hash);
-          const assignmentUrl = `https://localhost:5173/share/${hash}`;
+          const assignmentUrl = `https://assessly-h4b.vercel.app/share/${hash}`;
           alert(`Assignment link generated: ${assignmentUrl}`);
           setModal((e:boolean)=> !e)
           triggerRefresh()
@@ -285,7 +285,7 @@ const GeneratorModal = () => {
                 </div>
   
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {/* Manual Checkbox JSX with State */}
+                    
                     <label className="flex items-center p-4 border border-gray-700 rounded-xl hover:border-blue-500 hover:bg-gray-800/80 focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-500/20 transition-all duration-200 cursor-pointer group">
                       <div className="relative flex items-start">
                         <div className="flex items-center h-5">
@@ -471,7 +471,7 @@ const GeneratorModal = () => {
           </div>
         </div>
 
-        {/* Footer */}
+       
         <div className="bg-gray-800 px-6 py-6 sm:px-8 sm:py-6 md:px-10 flex flex-wrap justify-between items-center gap-4 border-t border-gray-700 mt-8">
           <div className="flex space-x-3">
             {currentPage > 1 && (

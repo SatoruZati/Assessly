@@ -21,7 +21,7 @@ export default function ExportTestResultsButton({ testHash }: ExportTestResultsB
 
         setIsLoading(true);
         try {
-            const response = await axios.post("http://localhost:3000/api/v1/tests/export", {
+            const response = await axios.post("https://assessly-h4b-server.vercel.app/api/v1/tests/export", {
                 hash: testHash,
             }, {
                 headers: {

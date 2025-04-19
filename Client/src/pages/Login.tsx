@@ -19,7 +19,7 @@ const Login: React.FC = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:3000/api/v1/auth/signin", {
+      const response = await axios.post("https://assessly-h4b-server.vercel.app/api/v1/auth/signin", {
         username: username,
         password: password,
       });

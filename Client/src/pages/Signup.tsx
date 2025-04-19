@@ -30,7 +30,7 @@ const Signup: React.FC = () => {
     }
 
     try {
-      await axios.post("http://localhost:3000/api/v1/auth/signup", {
+      await axios.post("https://assessly-h4b-server.vercel.app/api/v1/auth/signup", {
         firstName: firstname,
         lastName: lastname,
         username: username,

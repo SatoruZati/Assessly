@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import { Plus, Calendar, Clock, FileText, AlertCircle, Download, ExternalLink } from 'lucide-react';
+import { Plus, Calendar, Clock, FileText, AlertCircle, ExternalLink } from 'lucide-react';
 import { StateContext } from '../Context API/StateContext';
 import GenerateTest from './GenerateTest';
 import ExportButtonTest from './ExportButtonTest';
@@ -25,10 +25,6 @@ const Tests: React.FC = () => {
   const { refreshTrigger, triggerRefresh } = useContext(StateContext);
   const token = localStorage.getItem('token');
 
-  useEffect(() => {
-    fetchTests();
-  }, [refreshTrigger]);
-
   const fetchTests = async () => {
     setLoading(true);
     try {
@@ -43,6 +39,15 @@ const Tests: React.FC = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  useEffect(() => {
+    fetchTests();
+  }, [refreshTrigger]); 
+
+  const handleCloseModal = () => {
+    setShowGenerateModal(false);
+    fetchTests();
   };
 
   const formatDate = (dateString: string) => {
@@ -71,8 +76,9 @@ const Tests: React.FC = () => {
     alert('Test link copied to clipboard!');
   };
 
-  const handleTestCreated = (hash: string, url: string) => {
+  const handleTestCreated = () => {
     triggerRefresh();
+    fetchTests(); 
   };
 
   if (loading) {
@@ -162,7 +168,7 @@ const Tests: React.FC = () => {
       {/* Generate Test Modal */}
       <GenerateTest 
         isOpen={showGenerateModal} 
-        onClose={() => setShowGenerateModal(false)} 
+        onClose={handleCloseModal} 
         onTestCreated={handleTestCreated}
       />
     </div>

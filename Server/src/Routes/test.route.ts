@@ -10,11 +10,9 @@ import { createObjectCsvStringifier } from 'csv-writer';
 const apiKey = GEMINI_API_KEY? GEMINI_API_KEY : "null";
 const genAI = new GoogleGenerativeAI(apiKey);
 const router: Router = Router();
-
 const testGenerationModel = genAI.getGenerativeModel({
     model: "gemini-2.0-flash",
 });
-
 const testEvaluationModel = genAI.getGenerativeModel({
     model: "gemini-2.0-flash",
 });
@@ -36,7 +34,6 @@ router.get("/tests", userMiddleware, async (req: Request, res: Response): Promis
 router.post("/create", userMiddleware, async (req: Request, res: Response): Promise<void> => {
     const { title, subject, description, numQuestions, difficulty, testDateTime } = req.body;
     const userId = req.userId;
-
     if (!title || !subject || !description || !numQuestions || !difficulty || !testDateTime) {
         res.status(400).json({ message: "Missing required fields for test creation." });
         return;
@@ -49,7 +46,6 @@ router.post("/create", userMiddleware, async (req: Request, res: Response): Prom
         res.status(400).json({ message: "Difficulty must be 'easy', 'medium', or 'hard'." });
         return;
     }
-
     try {
         const testHash = randomHash(10, userId? userId : ""); 
         const newTest = new TestModel({
@@ -70,7 +66,6 @@ router.post("/create", userMiddleware, async (req: Request, res: Response): Prom
             message: "Test created successfully!",
             hash: testHash
         });
-
     } catch (error: any) {
         console.error("Error creating test:", error);
          if (error.name === 'ValidationError') {
@@ -87,7 +82,6 @@ router.get("/questions/:hash", async (req: Request, res: Response): Promise<void
         res.status(503).json({ message: "Test generation service unavailable." });
         return;
     }
-
     try {
         const testDefinition = await TestModel.findOne({ hash });
 
@@ -202,7 +196,6 @@ router.post("/submit/:hash", async (req: Request, res: Response): Promise<void> 
         res.status(400).json({ message: "Missing student name or submissions array." });
         return;
     }
-
     const isValidSubmissionFormat = submissions.every(sub =>
         typeof sub === 'object' && sub !== null &&
         typeof sub.question === 'string' &&
@@ -256,9 +249,7 @@ router.post("/submit/:hash", async (req: Request, res: Response): Promise<void> 
              console.error(`Gemini returned empty response for evaluation (hash: ${hash}, student: ${studentName}). Finish Reason: ${response.promptFeedback?.blockReason || response.candidates?.[0]?.finishReason || 'Unknown'}`);
              throw new Error("AI failed to evaluate the submission (empty response).");
         }
-
         const score = parseInt(scoreText, 10);
-
         if (isNaN(score) || score < 0 || score > 100) {
             console.error(`Gemini returned invalid score format: "${scoreText}" (hash: ${hash}, student: ${studentName})`);
             throw new Error("AI returned an invalid score format.");
@@ -306,7 +297,6 @@ router.post("/export", userMiddleware, async (req: Request, res: Response): Prom
         res.status(400).json({ message: "Test hash is required in the request body." });
         return;
     }
-
     try {
         const testDefinition = await TestModel.findOne({ hash: hash, userId: userId });
         if (!testDefinition) {

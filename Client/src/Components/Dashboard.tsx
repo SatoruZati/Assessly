@@ -5,7 +5,6 @@ import GeneratorModal from './GeneratorModal';
 import GenerateTest from './GenerateTest';
 import { StateContext } from '../Context API/StateContext';
 import DashboardTop from '../assets/DashboardTop.svg';
-import { FiDownload } from 'react-icons/fi';
 import ExportButtonTest from './ExportButtonTest';
 // Styled scrollbar CSS for Webkit browsers
 const scrollbarStyle = `
@@ -104,42 +103,6 @@ const Dashboard: React.FC = () => {
              });
              setTests(response.data.tests);
              console.log(tests);
-
-            
-            // setTests([
-            //     {
-            //         _id: '1',
-            //         title: 'Mid-Term Assessment',
-            //         description: 'Comprehensive test covering all topics from weeks 1-6',
-            //         duration: '120 mins',
-            //         startTime: '2024-04-15T14:00:00',
-            //         status: 'upcoming'
-            //     },
-            //     {
-            //         _id: '2',
-            //         title: 'Weekly Quiz #8',
-            //         description: 'Short quiz on recent topics',
-            //         duration: '30 mins',
-            //         startTime: '2024-04-10T10:00:00',
-            //         status: 'ongoing'
-            //     },
-            //     {
-            //         _id: '3',
-            //         title: 'Practice Test',
-            //         description: 'Optional practice test for final exam preparation',
-            //         duration: '60 mins',
-            //         startTime: '2024-04-20T15:00:00',
-            //         status: 'upcoming'
-            //     },
-            //     {
-            //         _id: '4',
-            //         title: 'Final Assessment',
-            //         description: 'End of semester comprehensive examination covering all modules',
-            //         duration: '180 mins',
-            //         startTime: '2024-04-30T09:00:00',
-            //         status: 'upcoming'
-            //     }
-            // ]);
         } catch (error) {
             console.error('Error fetching tests:', error);
         }

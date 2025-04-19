@@ -41,7 +41,7 @@ const Dashboard: React.FC = () => {
 
     const fetchUserData = async () => {
         try {
-            const response = await axios.get('https://localhost:3000/api/v1/users/data', {
+            const response = await axios.get('http://localhost:3000/api/v1/users/data', {
                 headers: {
                   token: token
                 }
@@ -54,7 +54,7 @@ const Dashboard: React.FC = () => {
 
     const fetchAssignmentsAndCounts = async () => {
         try {
-            const assignmentsResponse = await axios.get('https://localhost:3000/api/v1/assignments/', {
+            const assignmentsResponse = await axios.get('http://localhost:3000/api/v1/assignments/', {
                 headers: {
                     token: token
                 }

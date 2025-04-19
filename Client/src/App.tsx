@@ -8,6 +8,8 @@ import Dashboard from './Components/Dashboard'
 import LandingPage from './pages/LandingPage'
 import ErrorRoute from './pages/ErrorRoute'
 import Home from './pages/Home'
+import StudentSubmission from './pages/StudentSubmission'
+import Results from './Components/Results'
 
 function App() {
   return <StateProvider>
@@ -19,7 +21,10 @@ function App() {
             {<Route path='/home' element = {<Home/>}/>}
             {<Route path='/dashboard' element = {<Dashboard/>}/>}
             {<Route path='/' element = {<LandingPage/>}/>}
+            <Route path='/share/:shareId' element = {<StudentSubmission/>}/>
+            <Route path='/result' element = {<Results/>}/>
             {<Route path='*' element = {<ErrorRoute/>}/>}
+            
         </Routes>
     </BrowserRouter>
   </StateProvider>

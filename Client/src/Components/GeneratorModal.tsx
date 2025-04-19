@@ -120,7 +120,7 @@ const GeneratorModal = () => {
         Deadline: deadline,
       }
   
-      axios.post("https://localhost:3000/api/v1/assignments/generate", dataToSend, {
+      axios.post("http://localhost:3000/api/v1/assignments/generate", dataToSend, {
           headers: {
             token: token
           }
@@ -128,7 +128,7 @@ const GeneratorModal = () => {
         .then(response => {
           const hash = response.data.hash;
           localStorage.setItem('assignmentHash', hash);
-          const assignmentUrl = `https://grade-genie.vercel.app/share/${hash}`;
+          const assignmentUrl = `https://localhost:5173/share/${hash}`;
           alert(`Assignment link generated: ${assignmentUrl}`);
           setModal((e:boolean)=> !e)
         })

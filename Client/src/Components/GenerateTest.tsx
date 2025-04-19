@@ -103,7 +103,6 @@ const GenerateTest: React.FC<GenerateTestProps> = ({ isOpen, onClose, onTestCrea
                 submissionData,
                 {
                     headers: {
-                        'Content-Type': 'application/json',
                         'token': token
                     }
                 }

@@ -1,6 +1,5 @@
 import express, { Request, Response } from "express";
 import cors from "cors";
-
 import authRoutes from './Routes/auth.routes';
 import assignmentRoutes from './Routes/assignment.routes';
 import submissionRoutes from './Routes/submission.routes';
@@ -12,8 +11,8 @@ app.use(express.json());
 //CORS configuration done because of issues vercel deployment
 const corsOptions: cors.CorsOptions = {
     origin: [
-      'https://assessly-h4b.vercel.app/',
-      'http://localhost:5173/'  
+      'https://assessly-h4b.vercel.app',
+      'http://localhost:5173'  
     ],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
     allowedHeaders: [
@@ -39,7 +38,6 @@ const corsOptions: cors.CorsOptions = {
     preflightContinue: false,
     optionsSuccessStatus: 204
   };
-  
   app.use(cors(corsOptions));
   app.options('*', cors(corsOptions));
 
@@ -51,18 +49,17 @@ declare global{
     }
 }
 
+app.get("/", (req: Request, res: Response) => {
+    res.json({
+            message: "Server is alive!"
+    });
+});
+
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/assignments", assignmentRoutes); 
 app.use("/api/v1/submissions", submissionRoutes); 
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/tests", testRoutes);
-
-
-app.get("/", (req: Request, res: Response) => {
-        res.json({
-                message: "Server is alive!"
-        });
-});
 
 const PORT = 3000;
 app.listen(PORT, () => {

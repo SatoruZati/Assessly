@@ -1,4 +1,4 @@
-# Assessly - AI Teacher's Assistant
+# Assessly -  AI-Powered Teaching Assistant Tool for Educators
 
 **Developed for Hack4Bengal Hackathon**
 

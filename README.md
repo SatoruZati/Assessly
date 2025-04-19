@@ -1,4 +1,4 @@
-# Assessly - AI Teacher's Assistant 📝✨
+# Assessly - AI Teacher's Assistant
 
 **Developed for Hack4Bengal Hackathon**
 
@@ -8,7 +8,7 @@
 
 ---
 
-## 🚀 Live Demo & Preview
+## Live Demo & Preview
 
 Experience Assessly live: **[https://assessly-h4b.vercel.app/](https://assessly-h4b.vercel.app/)**
 
@@ -16,7 +16,7 @@ Experience Assessly live: **[https://assessly-h4b.vercel.app/](https://assessly-
 
 ---
 
-## 🎯 The Problem We Solve
+## The Problem We Solve
 
 Teachers in schools, coaching centres, and colleges often face an overwhelming workload, particularly when it comes to providing individualized feedback to students in large classrooms. The manual processes of grading assignments and creating tests are incredibly time-consuming, leaving educators with limited bandwidth to focus on actual teaching, mentoring, and personalized student interaction.
 
@@ -24,7 +24,7 @@ This challenge is especially acute in under-resourced educational settings where
 
 ---
 
-## ✨ Our Solution: Assessly
+## Our Solution: Assessly
 
 Assessly tackles these challenges head-on by offering a platform that leverages AI to automate and streamline key pedagogical tasks.
 
@@ -37,18 +37,18 @@ By automating these intensive tasks, Assessly frees up teachers to focus on what
 
 ---
 
-## 💡 Key Features
+## Key Features
 
-*   **🧠 AI-Powered Evaluation:** Automated grading and feedback for assignments and tests using advanced AI models.
-*   **✍️ OCR Support:** Seamlessly processes and evaluates handwritten answers, bridging the gap between traditional methods and digital efficiency.
-*   **📝 AI-Powered Test Generation:** Quickly create diverse and relevant online tests with just a few clicks.
-*   **🔑 Bring Your Own API Key:** Teachers can optionally add their own Google Gemini API keys to leverage higher usage limits or premium features. Keys are stored securely in our database.
-*   **📊 Centralized Dashboard:** Manage assignments, tests, submissions, and results all in one place.
-*   **🧘 Reduce Workload:** Significantly cuts down on administrative time, helping teachers balance professional and personal life.
+*   **AI-Powered Evaluation:** Automated grading and feedback for assignments and tests using advanced AI models.
+*   **OCR Support:** Seamlessly processes and evaluates handwritten answers, bridging the gap between traditional methods and digital efficiency.
+*   **AI-Powered Test Generation:** Quickly create diverse and relevant online tests with just a few clicks.
+*   **Bring Your Own API Key:** Teachers can optionally add their own Google Gemini API keys to leverage higher usage limits or premium features. Keys are stored securely in our database.
+*   **Centralized Dashboard:** Manage assignments, tests, submissions, and results all in one place.
+*   **Reduce Workload:** Significantly cuts down on administrative time, helping teachers balance professional and personal life.
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 *   **Frontend:** React, TypeScript, Tailwind CSS, Framer Motion
 *   **Backend:** Node.js, Express.js, TypeScript
@@ -59,7 +59,7 @@ By automating these intensive tasks, Assessly frees up teachers to focus on what
 
 ---
 
-##  IMPACT (Hack4Bengal Focus)
+## IMPACT (Hack4Bengal Focus)
 
 *   **Efficiency & Productivity:** Directly addresses teacher workload, saving hours spent on manual grading and test creation.
 *   **Enhanced Learning:** Provides students with faster, more consistent, and personalized feedback, crucial for academic improvement.
@@ -69,58 +69,65 @@ By automating these intensive tasks, Assessly frees up teachers to focus on what
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
-thebotheads-assessly/
+(Root directory `thebotheads-assessly/` contains `README.md` and `LICENSE`)
+
+### Client (Frontend)
+
+```
+Client/
 ├── README.md
-├── LICENSE
-├── Client/
-│ ├── README.md
-│ ├── eslint.config.js
-│ ├── index.html
-│ ├── package-lock.json
-│ ├── package.json
-│ ├── tsconfig.app.json
-│ ├── tsconfig.json
-│ ├── tsconfig.node.json
-│ ├── vercel.json
-│ ├── vite.config.ts
-│ ├── .gitignore
-│ ├── public/
-│ └── src/
-│ ├── App.tsx
-│ ├── Global.css
-│ ├── main.tsx
-│ ├── vite-env.d.ts
-│ ├── assets/
-│ ├── Components/
-│ │ ├── AssignmentCard.tsx
-│ │ ├── Assignments.tsx
-│ │ ├── AssignmentSection.tsx
-│ │ ├── CreateAssignments.tsx
-│ │ ├── Dashboard.tsx
-│ │ ├── ExportButton.tsx
-│ │ ├── ExportButtonTest.tsx
-│ │ ├── GenerateTest.tsx
-│ │ ├── GeneratorModal.tsx
-│ │ ├── Input.tsx
-│ │ ├── Results.tsx
-│ │ ├── Sidebar.tsx
-│ │ ├── SidebarItem.tsx
-│ │ ├── Submissions.tsx
-│ │ ├── TestQuestions.tsx
-│ │ └── Tests.tsx
-│ ├── Context API/
-│ │ └── StateContext.tsx
-│ └── pages/
-│ ├── ErrorRoute.tsx
-│ ├── Home.tsx
-│ ├── LandingPage.css
-│ ├── LandingPage.tsx
-│ ├── Login.tsx
-│ ├── Signup.tsx
-│ └── StudentSubmission.tsx
-└── Server/
+├── eslint.config.js
+├── index.html
+├── package-lock.json
+├── package.json
+├── tsconfig.app.json
+├── tsconfig.json
+├── tsconfig.node.json
+├── vercel.json
+├── vite.config.ts
+├── .gitignore
+├── public/
+└── src/
+    ├── App.tsx
+    ├── Global.css
+    ├── main.tsx
+    ├── vite-env.d.ts
+    ├── assets/
+    ├── Components/
+    │   ├── AssignmentCard.tsx
+    │   ├── Assignments.tsx
+    │   ├── AssignmentSection.tsx
+    │   ├── CreateAssignments.tsx
+    │   ├── Dashboard.tsx
+    │   ├── ExportButton.tsx
+    │   ├── ExportButtonTest.tsx
+    │   ├── GenerateTest.tsx
+    │   ├── GeneratorModal.tsx
+    │   ├── Input.tsx
+    │   ├── Results.tsx
+    │   ├── Sidebar.tsx
+    │   ├── SidebarItem.tsx
+    │   ├── Submissions.tsx
+    │   ├── TestQuestions.tsx
+    │   └── Tests.tsx
+    ├── Context API/
+    │   └── StateContext.tsx
+    └── pages/
+        ├── ErrorRoute.tsx
+        ├── Home.tsx
+        ├── LandingPage.css
+        ├── LandingPage.tsx
+        ├── Login.tsx
+        ├── Signup.tsx
+        └── StudentSubmission.tsx
+```
+
+### Server (Backend)
+
+```
+Server/
 ├── package-lock.json
 ├── package.json
 ├── tsconfig.json
@@ -128,25 +135,26 @@ thebotheads-assessly/
 ├── vercel.json
 ├── .gitignore
 └── src/
-├── index.ts
-├── Config/
-│ └── config.ts
-├── Middleware/
-│ └── middleware.ts
-├── Routes/
-│ ├── assignment.routes.ts
-│ ├── auth.routes.ts
-│ ├── submission.routes.ts
-│ ├── test.route.ts
-│ └── user.routes.ts
-├── Schema/
-│ └── db.ts
-└── utils/
-└── utils.ts
+    ├── index.ts
+    ├── Config/
+    │   └── config.ts
+    ├── Middleware/
+    │   └── middleware.ts
+    ├── Routes/
+    │   ├── assignment.routes.ts
+    │   ├── auth.routes.ts
+    │   ├── submission.routes.ts
+    │   ├── test.route.ts
+    │   └── user.routes.ts
+    ├── Schema/
+    │   └── db.ts
+    └── utils/
+        └── utils.ts
+```
 
 ---
 
-## ⚙️ Getting Started (Local Development)
+## Getting Started (Local Development)
 
 **Prerequisites:**
 *   Node.js and npm/yarn installed
@@ -171,22 +179,22 @@ thebotheads-assessly/
 
 ---
 
-## 🔮 Future Scope
+## Future Scope
 
 We envision Assessly evolving further to become an indispensable tool for educators:
 
-*   **📈 Scalability:** Enhance infrastructure to support a larger user base and concurrent operations.
-*   **🔒 Data Security:** Implement more robust data security and privacy measures.
-*   **🧩 LMS Integration:** Develop compatibility and integration with popular Learning Management Systems like Canvas, Blackboard, Moodle, and Google Classroom.
-*   **🔄 API for Data Exchange:** Provide an API to allow seamless data exchange and grade synchronization between Assessly and other educational platforms.
-*   **📊 Advanced Analytics:** Offer deeper insights into student performance and learning patterns.
+*   **Scalability:** Enhance infrastructure to support a larger user base and concurrent operations.
+*   **Data Security:** Implement more robust data security and privacy measures.
+*   **LMS Integration:** Develop compatibility and integration with popular Learning Management Systems like Canvas, Blackboard, Moodle, and Google Classroom.
+*   **API for Data Exchange:** Provide an API to allow seamless data exchange and grade synchronization between Assessly and other educational platforms.
+*   **Advanced Analytics:** Offer deeper insights into student performance and learning patterns.
 
 ---
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-Made with ❤️ by **The BotHeads** for Hack4Bengal.
+Made by **TheBotHeads** for Hack4Bengal.

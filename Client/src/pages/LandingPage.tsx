@@ -1,5 +1,6 @@
-import { useState, useEffect, useRef } from "react"
-import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion"
+import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
+import { useNavigate } from 'react-router-dom';
 import {
   Menu,
   X,
@@ -18,8 +19,8 @@ import {
   UserPlus,
   Share,
   ChevronRight,
-} from "lucide-react"
-import { FaTwitter, FaLinkedin, FaGithub, FaDiscord, FaFacebook } from "react-icons/fa"
+} from "lucide-react";
+import { FaTwitter, FaLinkedin, FaGithub, FaDiscord, FaFacebook } from "react-icons/fa";
 import Hack4BengalLogo from '../assets/Hack4BengalLogo.png';
 import AIStudioLogo from '../assets/AIStudioLogo.png';
 import GeminiLogo from '../assets/GeminiLogo.png';
@@ -29,72 +30,73 @@ import TypeScriptLogo from '../assets/TypeScriptLogo.png';
 import ViteLogo from '../assets/ViteLogo.png';
 import ReactLogo from '../assets/ReactLogo.png';
 
-const App = () => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
-  const [activeTestimonial, setActiveTestimonial] = useState(0)
-  const heroRef = useRef<HTMLDivElement>(null)
-  const { scrollYProgress } = useScroll()
-  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 })
+const LandingPage = () => {
+  const navigate = useNavigate();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [activeTestimonial, setActiveTestimonial] = useState(0);
+  const heroRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
 
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 50) {
-        setScrolled(true)
+        setScrolled(true);
       } else {
-        setScrolled(false)
+        setScrolled(false);
       }
-    }
+    };
 
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     const calculateViewportHeight = () => {
-      const vh = window.innerHeight
-      document.documentElement.style.setProperty("--vh", `${vh * 0.01}px`)
-    }
+      const vh = window.innerHeight;
+      document.documentElement.style.setProperty("--vh", `${vh * 0.01}px`);
+    };
 
-    calculateViewportHeight()
-    window.addEventListener("resize", calculateViewportHeight)
-    window.addEventListener("orientationchange", calculateViewportHeight)
+    calculateViewportHeight();
+    window.addEventListener("resize", calculateViewportHeight);
+    window.addEventListener("orientationchange", calculateViewportHeight);
 
     return () => {
-      window.removeEventListener("resize", calculateViewportHeight)
-      window.removeEventListener("orientationchange", calculateViewportHeight)
-    }
-  }, [])
+      window.removeEventListener("resize", calculateViewportHeight);
+      window.removeEventListener("orientationchange", calculateViewportHeight);
+    };
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setActiveTestimonial((prev) => (prev + 1) % 3)
-    }, 5000)
-    return () => clearInterval(interval)
-  }, [])
+      setActiveTestimonial((prev) => (prev + 1) % 3);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (mobileMenuOpen && !event.target) {
-        setMobileMenuOpen(false)
+        setMobileMenuOpen(false);
       }
-    }
+    };
 
-    document.addEventListener("click", handleClickOutside)
-    return () => document.removeEventListener("click", handleClickOutside)
-  }, [mobileMenuOpen])
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, [mobileMenuOpen]);
 
   useEffect(() => {
     if (mobileMenuOpen) {
-      document.body.style.overflow = "hidden"
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = ""
+      document.body.style.overflow = "";
     }
 
     return () => {
-      document.body.style.overflow = ""
-    }
-  }, [mobileMenuOpen])
+      document.body.style.overflow = "";
+    };
+  }, [mobileMenuOpen]);
 
   const testimonials = [
     {
@@ -118,7 +120,7 @@ const App = () => {
       text: "Creating tests used to take me hours. With Assessly, I can generate comprehensive assessments aligned with my curriculum in minutes. The AI evaluation is remarkably accurate.",
       color: "cyan",
     },
-  ]
+  ];
 
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
@@ -127,7 +129,7 @@ const App = () => {
       y: 0,
       transition: { duration: 0.6 },
     },
-  }
+  };
 
   const staggerContainer = {
     hidden: { opacity: 0 },
@@ -137,7 +139,7 @@ const App = () => {
         staggerChildren: 0.1,
       },
     },
-  }
+  };
 
   const navbarVariants = {
     transparent: {
@@ -148,7 +150,7 @@ const App = () => {
       backgroundColor: "rgba(13, 17, 23, 0.9)",
       boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
     },
-  }
+  };
 
   return (
     <div className="bg-[#0d1117] min-h-screen overflow-x-hidden text-white">
@@ -203,6 +205,7 @@ const App = () => {
 
               <div className="hidden md:flex space-x-4">
                 <motion.button
+                  onClick={() => navigate('/signin')}
                   className="font-medium px-5 py-2 rounded-full transition duration-200 bg-[#161b22]/70 backdrop-blur-sm text-white hover:bg-[#161b22] border border-blue-500/30"
                   whileHover={{ scale: 1.05, borderColor: "rgba(59, 130, 246, 0.5)" }}
                   whileTap={{ scale: 0.95 }}
@@ -210,6 +213,7 @@ const App = () => {
                   Login
                 </motion.button>
                 <motion.button
+                  onClick={() => navigate('/signup')}
                   className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-5 py-2 rounded-full transition duration-200 shadow-sm"
                   whileHover={{ scale: 1.05, boxShadow: "0 0 15px rgba(37, 99, 235, 0.5)" }}
                   whileTap={{ scale: 0.95 }}
@@ -221,8 +225,8 @@ const App = () => {
               <motion.button
                 className="md:hidden focus:outline-none text-white"
                 onClick={(e) => {
-                  e.stopPropagation()
-                  setMobileMenuOpen(!mobileMenuOpen)
+                  e.stopPropagation();
+                  setMobileMenuOpen(!mobileMenuOpen);
                 }}
                 aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
                 whileHover={{ scale: 1.1 }}
@@ -290,7 +294,8 @@ const App = () => {
                       <motion.button
                         className="bg-[#161b22] hover:bg-[#21262d] text-white font-medium px-5 py-4 rounded-xl transition duration-200 text-center text-lg border border-blue-500/30 flex items-center justify-center"
                         onClick={() => {
-                          setMobileMenuOpen(false)
+                          setMobileMenuOpen(false);
+                          navigate('/signin');
                         }}
                         variants={fadeIn}
                         whileHover={{ scale: 1.03 }}
@@ -304,7 +309,8 @@ const App = () => {
                       <motion.button
                         className="bg-blue-600 hover:bg-blue-700 text-white font-medium px-5 py-4 rounded-xl transition duration-200 text-center text-lg flex items-center justify-center"
                         onClick={() => {
-                          setMobileMenuOpen(false)
+                          setMobileMenuOpen(false);
+                          navigate('/signup');
                         }}
                         variants={fadeIn}
                         whileHover={{ scale: 1.03, boxShadow: "0 0 15px rgba(37, 99, 235, 0.5)" }}
@@ -445,6 +451,7 @@ const App = () => {
                     transition={{ duration: 0.8, delay: 0.6 }}
                   >
                     <motion.button
+                      onClick={() => navigate('/signup')} // <-- Added navigation
                       className="relative group bg-blue-600 text-white font-semibold px-8 py-4 rounded-full transition duration-300 shadow-lg flex items-center justify-center text-lg overflow-hidden z-10 hover:bg-blue-700"
                       whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(37, 99, 235, 0.5)" }}
                       whileTap={{ scale: 0.95 }}
@@ -465,6 +472,8 @@ const App = () => {
                       className="relative group bg-transparent border-2 border-blue-500 text-white font-semibold px-8 py-4 rounded-full transition duration-300 flex items-center justify-center text-lg backdrop-blur-sm overflow-hidden hover:bg-blue-900/30"
                       whileHover={{ scale: 1.05, borderColor: "rgba(59, 130, 246, 0.8)" }}
                       whileTap={{ scale: 0.95 }}
+                      // Add onClick if this should navigate somewhere, e.g., to a demo modal or page
+                      // onClick={() => console.log('Watch Demo clicked')}
                     >
                       <span className="relative z-10 flex items-center">Watch Demo</span>
                     </motion.button>
@@ -1225,8 +1234,8 @@ const App = () => {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.6, delay: 0.6 }}
           >
-            <motion.a
-              href="#"
+            <motion.button
+              onClick={() => navigate('/signup')} // <-- Added navigation
               className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600/80 to-cyan-600/80 hover:from-blue-600 hover:to-cyan-600 text-white font-medium rounded-full transition duration-200 backdrop-blur-sm"
               whileHover={{
                 scale: 1.05,
@@ -1246,7 +1255,7 @@ const App = () => {
               >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
               </motion.svg>
-            </motion.a>
+            </motion.button>
           </motion.div>
         </div>
       </section>
@@ -1471,6 +1480,7 @@ const App = () => {
               </div>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <motion.button
+                  onClick={() => navigate('/signup')} // <-- Added navigation
                   className="bg-blue-600 text-white font-semibold px-8 py-4 rounded-full hover:bg-blue-700 transition duration-200 shadow-md relative overflow-hidden group"
                   whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(37, 99, 235, 0.4)" }}
                   whileTap={{ scale: 0.95 }}
@@ -1485,6 +1495,8 @@ const App = () => {
                   className="bg-transparent border-2 border-blue-400 text-blue-100 font-semibold px-8 py-4 rounded-full hover:bg-blue-900/30 transition duration-200 relative overflow-hidden group"
                   whileHover={{ scale: 1.05, borderColor: "rgba(59, 130, 246, 0.8)" }}
                   whileTap={{ scale: 0.95 }}
+                   // Add onClick if this should navigate somewhere, e.g., to a demo modal or page
+                  // onClick={() => console.log('Watch Demo clicked')}
                 >
                   <span className="relative z-10">Watch Demo</span>
                   <motion.div className="absolute inset-0 bg-blue-800/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -1801,7 +1813,7 @@ const App = () => {
         </div>
       </footer>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default LandingPage;

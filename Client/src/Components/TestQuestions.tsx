@@ -23,7 +23,7 @@ const TestQuestions: React.FC = () => {
       try {
         setLoading(true)
         setError(null)
-        const response = await axios.get(`http://localhost:3000/api/v1/tests/questions/${testId}`, {
+        const response = await axios.get(`https://assessly-h4b-server.vercel.app/api/v1/tests/questions/${testId}`, {
           signal: controller.signal,
         })
         setTitle(response.data.title)
@@ -86,7 +86,7 @@ const TestQuestions: React.FC = () => {
     setLoading(true)
     setError(null)
     try {
-      const response = await axios.post(`http://localhost:3000/api/v1/tests/submit/${testId}`, {
+      const response = await axios.post(`https://assessly-h4b-server.vercel.app/api/v1/tests/submit/${testId}`, {
         studentName: studentName.trim(),
         submissions: questions.map((questionString, index) => ({
           question: questionString,

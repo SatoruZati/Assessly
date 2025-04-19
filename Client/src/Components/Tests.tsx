@@ -28,7 +28,7 @@ const Tests: React.FC = () => {
   const fetchTests = async () => {
     setLoading(true);
     try {
-      const response = await axios.get('http://localhost:3000/api/v1/tests/tests', {
+      const response = await axios.get('https://assessly-h4b-server.vercel.app/api/v1/tests/tests', {
         headers: { token: token }
       });
       setTests(response.data.tests);

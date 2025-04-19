@@ -70,7 +70,7 @@ const StudentSubmission = () => {
       setLoading(true)
       setError(null)
       try {
-        const response = await axios.get<any>(`http://localhost:3000/api/v1/assignments/share/${shareId}`)
+        const response = await axios.get<any>(`https://assessly-h4b-server.vercel.app/api/v1/assignments/share/${shareId}`)
         console.log(response.data.info)
         setAssignments(response.data.info)
       } catch (err: any) {

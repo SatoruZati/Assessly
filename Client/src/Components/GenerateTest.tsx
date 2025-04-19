@@ -12,7 +12,7 @@ interface GenerateTestProps {
     onTestCreated?: (hash: string, url: string) => void;
 }
 
-const API_BASE_URL = 'http://localhost:3000';
+const API_BASE_URL = 'https://assessly-h4b-server.vercel.app';
 
 const GenerateTest: React.FC<GenerateTestProps> = ({ isOpen, onClose, onTestCreated }) => {
     const [formData, setFormData] = useState({

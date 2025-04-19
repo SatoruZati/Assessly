@@ -41,7 +41,7 @@ const Results = () => {
       }, 800)
 
       const response = await axios.post(
-        "http://localhost:3000/api/v1/submissions/result",
+        "https://assessly-h4b-server.vercel.app/api/v1/submissions/result",
         { ocrText: ocrOutput, sub_id },
         { signal: abortController.signal },
       )
@@ -52,7 +52,7 @@ const Results = () => {
         setMarkdownContent(response.data.result)
         setProgress(100)
 
-        // Add a slight delay before showing results to complete animation
+       
         setTimeout(() => {
           setLoading(false)
           setAnimateSuccess(true)

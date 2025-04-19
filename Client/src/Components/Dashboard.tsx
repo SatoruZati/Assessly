@@ -6,7 +6,7 @@ import GenerateTest from './GenerateTest';
 import { StateContext } from '../Context API/StateContext';
 import DashboardTop from '../assets/DashboardTop.svg';
 import ExportButtonTest from './ExportButtonTest';
-// Styled scrollbar CSS for Webkit browsers
+
 const scrollbarStyle = `
   .themed-scrollbar::-webkit-scrollbar {
     width: 8px;
@@ -64,7 +64,7 @@ const Dashboard: React.FC = () => {
 
     const fetchUserData = async () => {
         try {
-            const response = await axios.get('http://localhost:3000/api/v1/users/data', {
+            const response = await axios.get('https://assessly-h4b-server.vercel.app/api/v1/users/data', {
                 headers: {
                   token: token
                 }
@@ -77,7 +77,7 @@ const Dashboard: React.FC = () => {
 
     const fetchAssignmentsAndCounts = async () => {
         try {
-            const assignmentsResponse = await axios.get('http://localhost:3000/api/v1/assignments/', {
+            const assignmentsResponse = await axios.get('https://assessly-h4b-server.vercel.app/api/v1/assignments/', {
                 headers: {
                     token: token
                 }
@@ -98,7 +98,7 @@ const Dashboard: React.FC = () => {
     const fetchTests = async () => {
         try {
             
-             const response = await axios.get('http://localhost:3000/api/v1/tests/tests', {
+             const response = await axios.get('https://assessly-h4b-server.vercel.app/api/v1/tests/tests', {
                  headers: { token: token }
              });
              setTests(response.data.tests);

@@ -47,14 +47,14 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, { hasError: bool
 }
 
 const Home: React.FC = () => {
-    // Destructure boolean state variables (isHome, isAssignments, isSubmissions) from StateContext
+    
     const { isHome, isAssignments, isSubmissions, isTests } = useContext(StateContext);
     const navigate = useNavigate();
     const token = localStorage.getItem('token');
 
     useEffect(() => {
         if (!token) {
-            navigate('/'); // Redirect without alert
+            navigate('/'); 
         }
     }, [token, navigate]);
 
@@ -63,7 +63,7 @@ const Home: React.FC = () => {
             <Sidebar/>
             <div className='w-full h-full'>
                 <ErrorBoundary>
-                    {isHome && <Dashboard/>}       {/* Use boolean state variables for conditional rendering */}
+                    {isHome && <Dashboard/>}       
                     {isAssignments && <FinalAssignment/>}
                     {isSubmissions && <Submissions/>}
                     {isTests && <Tests/>}

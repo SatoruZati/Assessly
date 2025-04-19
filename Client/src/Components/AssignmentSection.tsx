@@ -24,7 +24,7 @@ const AssignmentSection: React.FC = () => {
 
   const fetchAssignments = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/api/v1/assignments/latest/all', {
+      const response = await axios.get('https://assessly-h4b-server.vercel.app/api/v1/assignments/latest/all', {
         headers: { token: token || '' }
       });
       console.log(response.data.data);
@@ -49,7 +49,7 @@ const AssignmentSection: React.FC = () => {
     if (!window.confirm('Are you sure you want to delete this assignment?')) return;
     
     try {
-      await axios.delete(`http://localhost:3000/api/v1/assignments/delete`, {
+      await axios.delete(`https://assessly-h4b-server.vercel.app/api/v1/assignments/delete`, {
         headers: { 
           token: token || ''
         },

@@ -1,4 +1,4 @@
-# Assessly - AI Teacher's Assistant 🤖📝✨
+# Assessly - AI Teacher's Assistant 📝✨
 
 **Developed for Hack4Bengal Hackathon**
 

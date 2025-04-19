@@ -5,46 +5,50 @@ import Sidebar from '../Components/Sidebar';
 import Dashboard from '../Components/Dashboard';
 import FinalAssignment from '../Components/Assignments';
 import Submissions from '../Components/Submissions';
+import Tests from '../Components/Tests';
 
 
 interface ErrorBoundaryProps {
     children: React.ReactNode;
-  }
-
-  interface ErrorBoundaryState {
-    hasError: boolean;
 }
 
-class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
+class ErrorBoundary extends React.Component<ErrorBoundaryProps, { hasError: boolean, error: Error | null }> {
     constructor(props: ErrorBoundaryProps) {
-      super(props);
-      this.state = { hasError: false };
+        super(props);
+        this.state = { hasError: false, error: null };
     }
 
-    static getDerivedStateFromError(_: Error): ErrorBoundaryState {
-      return { hasError: true };
+    static getDerivedStateFromError(error: Error) {
+        return { hasError: true, error };
     }
 
-    componentDidCatch(error: Error, errorInfo: React.ErrorInfo): void {
-      console.error("Error caught:", error, errorInfo);
+    componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+        console.error("Error caught by ErrorBoundary:", error, errorInfo);
     }
 
-    render(): React.ReactNode {
+    render() {
         if (this.state.hasError) {
             return (
-                <>
-                    <h1>Oops! Something unexpected went wrong.</h1>
-                    <p>There was an error in the application. Refreshing the page might resolve the issue, but the problem could persist. If the problem continues, please contact support.</p>
-                </>
+                <div className="min-h-screen flex flex-col items-center justify-center bg-gray-900 p-4 text-white">
+                    <h1 className="text-2xl font-bold text-red-500 mb-4">Something went wrong</h1>
+                    <p className="text-gray-400 mb-6">{this.state.error?.message || "An unexpected error occurred."}</p>
+                    <button
+                        onClick={() => window.location.reload()}
+                        className="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition"
+                    >
+                        Refresh Page
+                    </button>
+                </div>
             );
         }
+
         return this.props.children;
     }
 }
 
 const Home: React.FC = () => {
     // Destructure boolean state variables (isHome, isAssignments, isSubmissions) from StateContext
-    const { isHome, isAssignments, isSubmissions } = useContext(StateContext);
+    const { isHome, isAssignments, isSubmissions, isTests } = useContext(StateContext);
     const navigate = useNavigate();
     const token = localStorage.getItem('token');
 
@@ -62,10 +66,11 @@ const Home: React.FC = () => {
                     {isHome && <Dashboard/>}       {/* Use boolean state variables for conditional rendering */}
                     {isAssignments && <FinalAssignment/>}
                     {isSubmissions && <Submissions/>}
+                    {isTests && <Tests/>}
                 </ErrorBoundary>
             </div>
             
         </div>
     );
-}
+};
 export default Home;

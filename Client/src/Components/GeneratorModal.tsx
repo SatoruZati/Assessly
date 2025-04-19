@@ -28,7 +28,7 @@ const GeneratorModal = () => {
     const [isEmailChecked, setIsEmailChecked] = useState<boolean>(false);
     const [isPhoneNumberChecked, setIsPhoneNumberChecked] = useState<boolean>(false);
   
-    const { modalOpen, setModal } = useContext(StateContext);
+    const { modalOpen, setModal, triggerRefresh } = useContext(StateContext);
   
   
     const nextPage = () => currentPage < 3 && setCurrentPage((p) => p + 1)
@@ -131,11 +131,13 @@ const GeneratorModal = () => {
           const assignmentUrl = `https://localhost:5173/share/${hash}`;
           alert(`Assignment link generated: ${assignmentUrl}`);
           setModal((e:boolean)=> !e)
+          triggerRefresh()
         })
         .catch(error => {
           console.error("Error sending data:", error);
           alert("Failed to generate assignment link. Please try again.");
           setModal((e:boolean)=> !e)
+          triggerRefresh()
         });
       console.log("Data to Send to Backend:", dataToSend)
     }

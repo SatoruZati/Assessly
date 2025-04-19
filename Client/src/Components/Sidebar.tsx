@@ -8,14 +8,12 @@ import { LiaBookReaderSolid } from "react-icons/lia";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { AiOutlineLogout } from "react-icons/ai";
 import { IoCloseOutline } from "react-icons/io5";
-import favicon from "../assets/favicon.ico";
+import { FaClipboardQuestion } from "react-icons/fa6";
 
 export const Sidebar = () => {
-    const { isHome, isAssignments, isSubmissions, setHome, setAssignments, setSubmissions } = useContext(StateContext);
+    const { isHome, isAssignments, isSubmissions, isTests, setHome, setAssignments, setSubmissions, setTests } = useContext(StateContext);
     const navigate = useNavigate();
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
-    const HomeIcon = () => <FaHome className="w-6 h-6" />;
 
     const toggleSidebar = () => {
         setIsSidebarOpen(!isSidebarOpen);
@@ -25,6 +23,7 @@ export const Sidebar = () => {
         setHome(true);
         setAssignments(false);
         setSubmissions(false);
+        setTests(false);
         setIsSidebarOpen(false);
     };
 
@@ -32,14 +31,23 @@ export const Sidebar = () => {
         setHome(false);
         setAssignments(true);
         setSubmissions(false);
+        setTests(false);
         setIsSidebarOpen(false);
-        
     };
 
     const handleSubmissionsClick = () => {
         setHome(false);
         setAssignments(false);
         setSubmissions(true);
+        setTests(false);
+        setIsSidebarOpen(false);
+    };
+    
+    const handleTestsClick = () => {
+        setHome(false);
+        setAssignments(false);
+        setSubmissions(false);
+        setTests(true);
         setIsSidebarOpen(false);
     };
 
@@ -50,85 +58,93 @@ export const Sidebar = () => {
 
     return (
         <>
-            {!isSidebarOpen && (
-                <div className="md:hidden fixed top-4 left-4 z-40">
-                    <button
-                        className="p-2 bg-gray-800 hover:bg-gray-700 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
-                        onClick={toggleSidebar}
-                        aria-label="Open menu"
-                    >
-                        <RxHamburgerMenu className="w-6 h-6 text-blue-400" />
-                    </button>
-                </div>
-            )}
+            {/* Mobile hamburger button */}
+            <div className="md:hidden fixed top-4 left-4 z-50">
+                <button 
+                    onClick={toggleSidebar}
+                    className="bg-gray-800/90 text-indigo-400 p-2 rounded-lg shadow-lg hover:bg-gray-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    aria-label="Toggle menu"
+                >
+                    {isSidebarOpen ? <IoCloseOutline size={24} /> : <RxHamburgerMenu size={24} />}
+                </button>
+            </div>
 
+            {/* Overlay for mobile when sidebar is open */}
             {isSidebarOpen && (
-                <div
-                    className="md:hidden fixed inset-0 bg-black bg-opacity-50 z-30 transition-opacity duration-300"
+                <div 
+                    className="md:hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-40 transition-opacity duration-300"
                     onClick={toggleSidebar}
                 ></div>
             )}
 
-            <div
-                className={`bg-gray-900 border-r border-gray-700 min-h-screen w-72 fixed md:relative transform transition-transform duration-300 ease-in-out z-40 md:z-0 ${
-                    isSidebarOpen ? "translate-x-0 shadow-2xl" : "-translate-x-full"
-                } md:translate-x-0 md:shadow-md`}
+            {/* Main sidebar */}
+            <div 
+                className={`fixed md:sticky top-0 h-screen z-45 md:z-10 w-72 bg-gradient-to-b from-gray-800 to-gray-900 text-white shadow-xl transform ${
+                    isSidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
+                } transition-all duration-300 ease-in-out border-r border-gray-700/30`}
             >
-                <div className="flex flex-col h-full">
-                    <div className="p-5 flex justify-between items-center border-b border-gray-800">
-                        <div
-                            onClick={handleHomeClick}
-                            className="text-2xl font-bold flex items-center cursor-pointer"
-                        >
-                            {/* <img
-                                src={favicon}
-                                alt="Assessly Logo"
-                                className="w-8 h-8 mr-2"
-                            /> */}
-                            <span className="text-blue-400 font-semibold">Assessly</span>
+                <div className="h-full flex flex-col">
+                    {/* Brand header */}
+                    <div className="p-6 flex items-center justify-center border-b border-gray-700/40">
+                        <div className="text-center">
+                            <h1 className="text-2xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
+                                Assessly
+                            </h1>
+                            <div className="text-xs text-gray-400 mt-1">Education Made Simple</div>
                         </div>
-                        {isSidebarOpen && (
-                            <div className="md:hidden block">
-                                <button
-                                    className="p-2 hover:bg-gray-800 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
-                                    onClick={toggleSidebar}
-                                    aria-label="Close menu"
-                                >
-                                    <IoCloseOutline className="w-6 h-6 text-gray-400" />
-                                </button>
-                            </div>
-                        )}
                     </div>
 
-                    <div className="flex flex-col flex-grow justify-between">
-                        <nav className="p-5 space-y-1">
-                            <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4 pl-4">Main Menu</div>
-                            <SidebarItem
-                                onClick={handleHomeClick}
-                                icon={<HomeIcon />}
-                                text="Home"
-                                active={isHome}
+                    {/* Navigation section */}
+                    <div className="flex-grow overflow-y-auto py-6 px-4">
+                        <div className="mb-6 px-2">
+                            <div className="h-1 w-12 bg-indigo-500 rounded-full mb-2"></div>
+                            <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
+                                Navigation
+                            </h3>
+                        </div>
+                        
+                        <ul className="space-y-2">
+                            <SidebarItem 
+                                text="Dashboard" 
+                                icon={<FaHome className="w-5 h-5" />} 
+                                onClick={handleHomeClick} 
+                                active={isHome} 
                             />
-                            <SidebarItem
-                                onClick={handleAssignmentClick}
-                                icon={<LuNotebookPen className="w-6 h-6" />}
-                                text="Assignments"
-                                active={isAssignments}
+                            <SidebarItem 
+                                text="Assignments" 
+                                icon={<LuNotebookPen className="w-5 h-5" />} 
+                                onClick={handleAssignmentClick} 
+                                active={isAssignments} 
                             />
-                            <SidebarItem
-                                onClick={handleSubmissionsClick}
-                                icon={<LiaBookReaderSolid className="w-6 h-6" />}
-                                text="Submissions"
-                                active={isSubmissions}
+                            <SidebarItem 
+                                text="Submissions" 
+                                icon={<LiaBookReaderSolid className="w-5 h-5" />} 
+                                onClick={handleSubmissionsClick} 
+                                active={isSubmissions} 
                             />
-                        </nav>
+                            <SidebarItem 
+                                text="Tests" 
+                                icon={<FaClipboardQuestion className="w-5 h-5" />} 
+                                onClick={handleTestsClick} 
+                                active={isTests} 
+                            />
+                        </ul>
+                    </div>
 
-                        <div className="p-5 border-t border-gray-800">
-                            <SidebarItem
-                                onClick={handleLogoutClick}
-                                icon={<AiOutlineLogout className="w-6 h-6" />}
-                                text="Logout"
-                            />
+                    {/* Bottom section */}
+                    <div className="p-4 border-t border-gray-700/40">
+                        <button 
+                            onClick={handleLogoutClick}
+                            className="flex items-center justify-center w-full px-4 py-2.5 rounded-lg bg-gray-700/30 hover:bg-gray-700/60 text-gray-300 hover:text-white transition-all duration-200 group"
+                        >
+                            <AiOutlineLogout className="w-5 h-5 mr-3 text-indigo-400 group-hover:text-indigo-300" />
+                            <span>Logout</span>
+                        </button>
+                        
+                        <div className="mt-4 pt-4 border-t border-gray-800/60 text-center">
+                            <div className="text-xs text-gray-500">
+                                © {new Date().getFullYear()} Assessly
+                            </div>
                         </div>
                     </div>
                 </div>

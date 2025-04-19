@@ -17,7 +17,6 @@ export const StateProvider: React.FC<StateProviderProps> = ({ children }) => {
     const [studentName, setStudentName] = useState("")
     const [refreshTrigger, setRefreshTrigger] = useState(0)
 
-    // Function to trigger a refresh of data in components watching this state
     const triggerRefresh = () => setRefreshTrigger(prev => prev + 1)
 
     return (

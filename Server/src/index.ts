@@ -31,7 +31,7 @@ app.use("/api/v1/tests", testRoutes);
 
 app.get("/", (req: Request, res: Response) => {
         res.json({
-                message: "GradeGenie Server is alive!"
+                message: "Server is alive!"
         });
 });
 

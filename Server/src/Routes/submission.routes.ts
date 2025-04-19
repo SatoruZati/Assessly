@@ -85,6 +85,7 @@ router.post("/data", upload.single('assignmentFile'), async (req: Request, res: 
             const { url } = await put(file.originalname, file.buffer, {
                 access: 'public', 
                 token: MAIN_READ_WRITE_TOKEN,
+                addRandomSuffix: true, 
             });
             assignmentFilePath = url;
             try {

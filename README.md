@@ -8,9 +8,11 @@
 
 ---
 
-## 🚀 Live Demo
+## 🚀 Live Demo & Preview
 
 Experience Assessly live: **[https://assessly-h4b.vercel.app/](https://assessly-h4b.vercel.app/)**
+
+![Assessly Landing Page Screenshot](Client/src/assets/AssesslyLandingPage.png)
 
 ---
 
@@ -141,7 +143,6 @@ thebotheads-assessly/
 │ └── db.ts
 └── utils/
 └── utils.ts
-
 
 ---
 

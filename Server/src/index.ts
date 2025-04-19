@@ -12,7 +12,8 @@ app.use(express.json());
 const corsOptions: cors.CorsOptions = {
     origin: [
       'https://assessly-h4b.vercel.app',
-      'http://localhost:5173'  
+      'https://assessly-h4b-git-*.vercel.app',
+      'http://localhost:5173/'  
     ],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
     allowedHeaders: [

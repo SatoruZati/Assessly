@@ -29,6 +29,7 @@ import TailwindCSSLogo from '../assets/TailwindCSSLogo.png';
 import TypeScriptLogo from '../assets/TypeScriptLogo.png';
 import ViteLogo from '../assets/ViteLogo.png';
 import ReactLogo from '../assets/ReactLogo.png';
+import dashboardImg from "../assets/Dashboard.png"
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -331,7 +332,7 @@ const LandingPage = () => {
       </motion.div>
 
       <div
-        className="relative overflow-hidden bg-gradient-to-r from-[#0d1117] via-[#1a2036] to-[#0d1117]"
+        className="relative overflow-hidden bg-gradient-to-r from-[#0d1117] via-[#1a2036] to-[#0d1117] mask-b-from-20% mask-b-to-135%"
         ref={heroRef}
         style={{
           minHeight: `calc(var(--vh, 1vh) * 100)`,
@@ -412,7 +413,7 @@ const LandingPage = () => {
                     <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full blur-md opacity-50"></div>
                     <div className="px-4 py-1.5 rounded-full bg-[#161b22]/70 text-white text-sm font-medium backdrop-blur-md border border-blue-500/50 shadow-xl relative z-10">
                       <span className="bg-gradient-to-r from-blue-300 to-cyan-300 bg-clip-text text-transparent font-semibold">
-                        AI-Powered Teaching Assistant
+                        AI-Powered Teaching Assistant Tool
                       </span>
                     </div>
                   </motion.div>
@@ -427,7 +428,7 @@ const LandingPage = () => {
                     <span className="relative">
                       <span className="absolute -inset-1 bg-gradient-to-r from-blue-500 to-cyan-500 blur-xl opacity-30 rounded-lg"></span>
                       <span className="relative text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-300">
-                        Teaching Assistant
+                        Teaching Assistant Tool
                       </span>
                     </span>
                   </motion.h1>
@@ -439,7 +440,7 @@ const LandingPage = () => {
                     transition={{ duration: 0.8, delay: 0.4 }}
                   >
                     <p className="text-lg sm:text-xl text-blue-100 mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed">
-                      A platform that simplifies teaching, guiding, evaluating, and grading with just a few clicks.
+                      A platform that simplifies teaching, guiding, taking tests, evaluating, and grading with just a few clicks.
                       Balance your personal and professional life easily.
                     </p>
                   </motion.div>
@@ -565,11 +566,11 @@ const LandingPage = () => {
                             <div className="absolute inset-0 rounded-xl"></div>
                           </motion.div>
 
-                          <div className="relative rounded-lg overflow-hidden border-2 border-blue-500/20 group">
+                          <div className="relative rounded-lg overflow-hidden border-blue-500/20 group">
                             <img
-                              src="/placeholder.svg?height=600&width=800"
+                              src={dashboardImg || "/placeholder.svg?height=600&width=800"}
                               alt="Assessly Dashboard Preview"
-                              className="rounded-lg shadow-2xl w-full h-auto transition-all duration-500 group-hover:scale-105"
+                              className="rounded-lg shadow-2xl w-full h-auto transition-all duration-500 group-hover:scale-100"
                               loading="lazy"
                             />
 

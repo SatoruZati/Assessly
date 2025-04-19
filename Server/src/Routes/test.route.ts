@@ -78,7 +78,7 @@ router.post("/create", userMiddleware, async (req: Request, res: Response): Prom
          } else {
              res.status(500).json({ message: "Failed to create test due to server error." });
          }
-    }
+    } return;
 });
 
 router.get("/questions/:hash", async (req: Request, res: Response): Promise<void> => {
@@ -136,9 +136,6 @@ router.get("/questions/:hash", async (req: Request, res: Response): Promise<void
             console.error(`Gemini returned empty response for question generation (hash: ${hash}). Finish Reason: ${response.promptFeedback?.blockReason || response.candidates?.[0]?.finishReason || 'Unknown'}`);
             throw new Error("AI failed to generate questions (empty response).");
         }
-
-        console.log(`Raw response received from Gemini for hash ${hash}: \n---\n${responseText}\n---`);
-
         const lines = responseText.trim().split('\n');
         const extractedQuestions: string[] = [];
         const lineErrors: string[] = [];
@@ -177,7 +174,7 @@ router.get("/questions/:hash", async (req: Request, res: Response): Promise<void
         }
 
         console.log(`Successfully parsed ${extractedQuestions.length} questions in numbered list format for test hash: ${hash}`);
-
+        console.log(extractedQuestions);
         res.status(200).json({
             title: testDefinition.title,
             subject: testDefinition.subject,
@@ -193,7 +190,7 @@ router.get("/questions/:hash", async (req: Request, res: Response): Promise<void
         } else {
             res.status(500).json({ message: "Server error while retrieving test questions." });
         }
-    }
+    } return;
 });
 
 
@@ -298,7 +295,7 @@ router.post("/submit/:hash", async (req: Request, res: Response): Promise<void> 
          else {
             res.status(500).json({ message: "Server error during test submission or evaluation." });
         }
-    }
+    } return;
 });
 
 router.post("/export", userMiddleware, async (req: Request, res: Response): Promise<void> => {

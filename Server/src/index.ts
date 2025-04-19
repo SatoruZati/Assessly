@@ -18,6 +18,7 @@ const corsOptions: cors.CorsOptions = {
     allowedHeaders: [
       'Content-Type',
       'Authorization',
+      'token'
     ],
     exposedHeaders: [
       'Content-Disposition', 

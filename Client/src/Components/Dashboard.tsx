@@ -5,6 +5,26 @@ import GeneratorModal from './GeneratorModal';
 import GenerateTest from './GenerateTest';
 import { StateContext } from '../Context API/StateContext';
 import DashboardTop from '../assets/DashboardTop.svg';
+import { FiDownload } from 'react-icons/fi';
+import ExportButtonTest from './ExportButtonTest';
+// Styled scrollbar CSS for Webkit browsers
+const scrollbarStyle = `
+  .themed-scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+  .themed-scrollbar::-webkit-scrollbar-track {
+    background: #1f2937;
+    border-radius: 6px;
+  }
+  .themed-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #4f46e5;
+    border-radius: 6px;
+    border: 2px solid #1f2937;
+  }
+  .themed-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: #6366f1;
+  }
+`;
 
 interface Card {
     _id?: string; 
@@ -17,11 +37,13 @@ interface Card {
 }
 
 interface Test {
+    hash?: string;
     _id?: string;
     title: string;
     description: string;
     duration: string;
-    startTime: string;
+    testDateTime: string;
+    numQuestions: number;
     status: 'upcoming' | 'ongoing' | 'completed';
 }
 
@@ -37,7 +59,9 @@ const Dashboard: React.FC = () => {
     const [testModalOpen, setTestModalOpen] = useState<boolean>(false);
     const token = localStorage.getItem('token');
     const navigate = useNavigate();
-    const { setModal } = useContext(StateContext);
+    const { setModal, refreshTrigger } = useContext(StateContext);
+
+    
 
     const fetchUserData = async () => {
         try {
@@ -71,50 +95,51 @@ const Dashboard: React.FC = () => {
         }
     };
 
-    // Simulated tests data - Replace with actual API call when available
+   
     const fetchTests = async () => {
         try {
-            // Replace with actual API endpoint when available
-            // const response = await axios.get('https://localhost:3000/api/v1/tests', {
-            //     headers: { token: token }
-            // });
-            // setTests(response.data);
+            
+             const response = await axios.get('http://localhost:3000/api/v1/tests/tests', {
+                 headers: { token: token }
+             });
+             setTests(response.data.tests);
+             console.log(tests);
 
-            // Temporary mock data
-            setTests([
-                {
-                    _id: '1',
-                    title: 'Mid-Term Assessment',
-                    description: 'Comprehensive test covering all topics from weeks 1-6',
-                    duration: '120 mins',
-                    startTime: '2024-04-15T14:00:00',
-                    status: 'upcoming'
-                },
-                {
-                    _id: '2',
-                    title: 'Weekly Quiz #8',
-                    description: 'Short quiz on recent topics',
-                    duration: '30 mins',
-                    startTime: '2024-04-10T10:00:00',
-                    status: 'ongoing'
-                },
-                {
-                    _id: '3',
-                    title: 'Practice Test',
-                    description: 'Optional practice test for final exam preparation',
-                    duration: '60 mins',
-                    startTime: '2024-04-20T15:00:00',
-                    status: 'upcoming'
-                },
-                {
-                    _id: '4',
-                    title: 'Final Assessment',
-                    description: 'End of semester comprehensive examination covering all modules',
-                    duration: '180 mins',
-                    startTime: '2024-04-30T09:00:00',
-                    status: 'upcoming'
-                }
-            ]);
+            
+            // setTests([
+            //     {
+            //         _id: '1',
+            //         title: 'Mid-Term Assessment',
+            //         description: 'Comprehensive test covering all topics from weeks 1-6',
+            //         duration: '120 mins',
+            //         startTime: '2024-04-15T14:00:00',
+            //         status: 'upcoming'
+            //     },
+            //     {
+            //         _id: '2',
+            //         title: 'Weekly Quiz #8',
+            //         description: 'Short quiz on recent topics',
+            //         duration: '30 mins',
+            //         startTime: '2024-04-10T10:00:00',
+            //         status: 'ongoing'
+            //     },
+            //     {
+            //         _id: '3',
+            //         title: 'Practice Test',
+            //         description: 'Optional practice test for final exam preparation',
+            //         duration: '60 mins',
+            //         startTime: '2024-04-20T15:00:00',
+            //         status: 'upcoming'
+            //     },
+            //     {
+            //         _id: '4',
+            //         title: 'Final Assessment',
+            //         description: 'End of semester comprehensive examination covering all modules',
+            //         duration: '180 mins',
+            //         startTime: '2024-04-30T09:00:00',
+            //         status: 'upcoming'
+            //     }
+            // ]);
         } catch (error) {
             console.error('Error fetching tests:', error);
         }
@@ -129,7 +154,7 @@ const Dashboard: React.FC = () => {
         else {
             navigate('/');
         }
-    }, []);
+    }, [refreshTrigger]);
 
     useEffect(() => {
         if (cards && submissionCounts && cards.length > 0 && submissionCounts.length > 0 && cards.length === submissionCounts.length) {
@@ -194,6 +219,7 @@ const Dashboard: React.FC = () => {
 
     return (
         <div className="min-h-screen mt-0 pt-2 bg-gray-900">
+            <style>{scrollbarStyle}</style>
             <div className="flex bg-gradient-to-r from-indigo-500 to-purple-600 m-4 p-6 rounded-xl shadow-lg relative overflow-hidden transform transition-all duration-500 hover:shadow-xl">
                 <div className="flex flex-col gap-3 justify-center z-10 font-poppins max-w-[60%] text-white">
                     <h1 className="text-4xl font-bold tracking-tight">
@@ -201,12 +227,12 @@ const Dashboard: React.FC = () => {
                         <span className="inline-block animate-wave ml-2">👋</span>
                     </h1>
                     <p className="text-indigo-100">
-                        Assessly - Simplifying assignment submissions and grading for students and educators.
-                        <br />Here's an overview of your active assignments.
+                        Assessly - Simplifying assignment submissions and grading for students and educators. Now with magic test question generation for stress-free quizzes!" 
+                        <br />Here's an overview of your active assignments and tests. 
                     </p>
                     <div className="flex gap-2 mt-2">
                         <button
-                            className="bg-gray-800 text-indigo-400 px-4 py-1 rounded-full text-sm font-medium hover:bg-gray-700 transition-all border border-indigo-500/20"
+                            className="bg-gray-800 text-indigo-400 px-4 py-2 rounded-full text-sm font-medium hover:bg-gray-700 transition-all border border-indigo-500/20"
                             onClick={() => setModal(true)}
                         >
                             Create a New Assignment
@@ -327,37 +353,43 @@ const Dashboard: React.FC = () => {
                             </div>
                         </div>
 
-                        <div className="space-y-4">
+                        <div className="space-y-4 max-h-[270px] overflow-y-scroll pr-2 themed-scrollbar" style={{ 
+                            scrollbarWidth: 'thin',
+                            scrollbarColor: '#4f46e5 #1f2937'
+                        }}>
                             {tests.map((test) => (
                                 <div 
                                     key={test._id} 
-                                    className="group p-4 bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl hover:from-indigo-900/30 hover:to-purple-900/30 transition-all duration-300 cursor-pointer border border-gray-700 hover:border-indigo-500/30 shadow-sm hover:shadow-md transform hover:-translate-y-0.5"
+                                    className="group p-4 bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl hover:from-indigo-900/30 hover:to-purple-900/30 transition-all duration-300 cursor-pointer border border-gray-700 hover:border-indigo-500/30 shadow-sm hover:shadow-md transform hover:-translate-y-0.5 min-h-[120px]"
                                 >
                                     <div className="flex justify-between items-start mb-3">
                                         <h3 className="font-semibold text-gray-100 group-hover:text-indigo-300 transition-colors duration-300">{test.title}</h3>
-                                        <span className={`${getTestStatusColor(test.status)} px-3 py-1 rounded-full text-xs font-medium shadow-sm`}>
+                                        {/* <span className={`${getTestStatusColor(test.status)} px-3 py-1 rounded-full text-xs font-medium shadow-sm`}>
                                             {test.status.charAt(0).toUpperCase() + test.status.slice(1)}
-                                        </span>
+                                        </span> */}
                                     </div>
                                     <p className="text-sm text-gray-400 mb-3 line-clamp-2 group-hover:text-gray-300">{test.description}</p>
-                                    <div className="flex items-center gap-4 text-sm text-gray-400">
-                                        <div className="flex items-center gap-2 bg-gray-700/80 px-3 py-1 rounded-full shadow-sm">
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                            </svg>
-                                            <span className="font-medium text-gray-300">{test.duration}</span>
+                                    <div className="flex items-center justify-between gap-4 text-sm text-gray-400">
+                                        <div className="flex items-center gap-2">
+                                            <div className="flex items-center gap-2 bg-gray-700/80 px-3 py-1 rounded-full shadow-sm">
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                </svg>
+                                                <span className="font-medium text-gray-300">{test.numQuestions}</span>
+                                            </div>
+                                            <div className="flex items-center gap-2 bg-gray-700/80 px-3 py-1 rounded-full shadow-sm">
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                                </svg>
+                                                <span className="font-medium text-gray-300">{new Date(test.testDateTime).toLocaleDateString('en-US', {
+                                                    month: 'short',
+                                                    day: 'numeric',
+                                                    hour: '2-digit',
+                                                    minute: '2-digit'
+                                                })}</span>
+                                            </div>
                                         </div>
-                                        <div className="flex items-center gap-2 bg-gray-700/80 px-3 py-1 rounded-full shadow-sm">
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                            </svg>
-                                            <span className="font-medium text-gray-300">{new Date(test.startTime).toLocaleDateString('en-US', {
-                                                month: 'short',
-                                                day: 'numeric',
-                                                hour: '2-digit',
-                                                minute: '2-digit'
-                                            })}</span>
-                                        </div>
+                                        <ExportButtonTest testHash={test.hash || ''} />
                                     </div>
                                 </div>
                             ))}

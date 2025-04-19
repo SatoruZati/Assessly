@@ -9,7 +9,6 @@ import fs from "fs/promises";
 import path from "path";
 
 const router: Router = Router();
-
 const upload = multer({
     storage: multer.memoryStorage(),
     limits: { fileSize: 3 * 1024 * 1024 }
@@ -66,12 +65,11 @@ const model = genAI.getGenerativeModel({
 
 const generationConfig = {
     temperature: 1,
-    topP: 0.95,
+    topP: 0.70,
     topK: 40,
     maxOutputTokens:5000,
     responseMimeType: "text/plain",
 };
-
 
 // POST /api/v1/submissions/data (Handles file upload and initial submission)
 router.post("/data", upload.single('assignmentFile'), async (req: Request, res: Response): Promise<void> => {
